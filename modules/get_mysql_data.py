@@ -75,6 +75,27 @@ def get_per_col(results):
     data_list.append(data)
   return data_list
 
+def select_att_id(att_id):
+  # try:
+    con = pool.get_connection()
+    cursor = con.cursor(dictionary=True)
+
+    sql = f"SELECT * FROM attraction_table WHERE id={att_id}"
+    cursor.execute(sql)
+    result = cursor.fetchone()
+    return result
+
+
+  #   return att_id_result
+  # except :
+  #   print("Can not select")
+
+  # finally:
+  #   if con.in_transaction:
+  #     con.rollback()
+  #   con.close()
+
+select_att_id(1)
 
 
 

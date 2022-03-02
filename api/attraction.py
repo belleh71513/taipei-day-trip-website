@@ -1,5 +1,5 @@
 from flask import *
-from modules.get_mysql_data import select_attractions,check_data_count
+from modules.get_mysql_data import select_attractions,check_data_count, select_att_id
 
 attractions = Blueprint("attractions", __name__)
 
@@ -22,14 +22,14 @@ def api_attractions():
         }
         return jsonify(res)
       search_results = select_attractions(page=page, keyword=keyword)
-      check_next_page = search_result_count // 12
-    # 如果資料筆數>=12
-      if check_next_page > page:
+      # 檢查是否有下一頁
+      next_page_results = select_attractions(page=page, keyword=keyword)
+      # 如果資料筆數該值==12表示還有下一頁
+      if len(next_page_results) == 12:
         res = {
           "nextPage":page + 1,
           "data":search_results
         }
-      # 資料比數介於0~12
       else :
         res = {
           "nextPage":None,
@@ -37,8 +37,11 @@ def api_attractions():
         }
       return jsonify(res)
     else:
+      # 沒有輸入欄位的狀況，全部資料一頁一頁顯示
       search_results = select_attractions(page=page,keyword=None)
-      if len(search_results) == 12:
+      next_page_results = select_attractions(page=page+1,keyword=None)
+      # 如果資料長度
+      if len(next_page_results) == 12:
         res = {
           "nextPage":page + 1,
           "data":search_results
@@ -54,10 +57,43 @@ def api_attractions():
     return jsonify({
       "error":True,
       "message":"伺服器發生錯誤"
-    })
+    },500)
 
-# @attractions.route("/attraction/<int:attractionID>")
-# def api_attraction_attractionID(attractionID):
+@attractions.route("/attraction/<int:attractionID>")
+def api_attraction_attractionID(attractionID):
+  try:
+    get_att_id = select_att_id(attractionID)
+    if get_att_id:
+      res = {
+        "id": get_att_id["id"],
+        "name": get_att_id["name"],
+        "category": get_att_id["category"],
+        "description": get_att_id["description"],
+        "address": get_att_id["address"],
+        "transport": get_att_id["transport"],
+        "mrt": get_att_id["mrt"],
+        "latitude": get_att_id["latitude"],
+        "longitude": get_att_id["longitude"],
+        "images": [get_att_id["images"]]
+      }
+    else:
+      res = {
+        "error": True,
+        "message": "景點編號不正確"
+      }
+    return jsonify(res)
+  except:
+    res = {
+      "error": True,
+      "message": "伺服器內部錯誤"
+    }
+    return jsonify(res)
+
+
+
+
+
+
 
 
 
