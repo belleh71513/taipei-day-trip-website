@@ -1,18 +1,6 @@
 import json
-import mysql.connector.pooling
+from pool import pool
 
-dbconfig = {
-  "host":"localhost",
-  "user":"root",
-  "password":"password",
-  "database":"taipei_website",
-}
-
-pool = mysql.connector.pooling.MySQLConnectionPool(
-  pool_name = "my_pool",
-  pool_size = 5,
-  **dbconfig
-)
 con = pool.get_connection()
 cursor = con.cursor(dictionary=True)
 
