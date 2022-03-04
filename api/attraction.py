@@ -35,13 +35,7 @@ def api_attractions():
         }
       # 資料筆數介數<12
       else :
-        # 如果篩選下一頁為0筆，表示搜尋完畢，data null
-        if not len(next_page_results):
-          res = {
-          "nextPage":None,
-          "data":None
-          }
-        else:
+        # 如果篩選下一頁為0筆，表示搜尋完畢，data null        
           res = {
             "nextPage":None,
             "data":search_results
@@ -57,13 +51,7 @@ def api_attractions():
           "nextPage":page + 1,
           "data":search_results
         }
-      else:
-        if not len(next_page_results):
-          res = {
-          "nextPage":None,
-          "data":None
-          }      
-        else:
+      else:        
           res = {
             "nextPage":None,
             "data":search_results
