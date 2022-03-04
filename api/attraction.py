@@ -17,6 +17,7 @@ def api_attractions():
     if keyword:
       # 檢查該keyword有幾筆資料
       search_result_count = check_data_count(keyword)
+      # 先處理找不到關鍵字的情況
       if not search_result_count:
         res = {
           "error":True,
@@ -32,34 +33,42 @@ def api_attractions():
           "nextPage":page + 1,
           "data":search_results
         }
+      # 資料筆數介數<12
       else :
+        # 如果篩選下一頁為0筆，表示搜尋完畢，data null
         if not len(next_page_results):
           res = {
           "nextPage":None,
-          "message":"資料已全部顯示"
+          "data":None
           }
-        res = {
-          "nextPage":None,
-          "data":search_results
-        }
+        else:
+          res = {
+            "nextPage":None,
+            "data":search_results
+          }
       return jsonify(res)
     else:
       # 沒有輸入欄位的狀況，全部資料一頁一頁顯示
       search_results = select_attractions(page=page,keyword=None)
       next_page_results = select_attractions(page=page+1,keyword=None)
-      # 如果資料長度
+      
       if len(next_page_results) == 12:
         res = {
           "nextPage":page + 1,
           "data":search_results
         }
-      else:        
-        res = {
+      else:
+        if not len(next_page_results):
+          res = {
           "nextPage":None,
-          "data":search_results
-        }
+          "data":None
+          }      
+        else:
+          res = {
+            "nextPage":None,
+            "data":search_results
+          }
       return jsonify(res)
-
   except:
     return jsonify({
       "error":True,
@@ -70,6 +79,7 @@ def api_attractions():
 def api_attraction_attractionID(attractionID):
   try:
     get_att_id = select_att_id(attractionID)
+    # SQL中有該id
     if get_att_id:
       res = {
         "id": get_att_id["id"],
