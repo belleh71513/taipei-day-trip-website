@@ -31,6 +31,11 @@ def api_attractions():
           "data":search_results
         }
       else :
+        if not len(next_page_results):
+          res = {
+          "nextPage":None,
+          "message":"資料已全部顯示"
+          }
         res = {
           "nextPage":None,
           "data":search_results
@@ -47,6 +52,11 @@ def api_attractions():
           "data":search_results
         }
       else:
+        if not len(next_page_results):
+          res = {
+          "nextPage":None,
+          "message":"資料已全部顯示"
+          }
         res = {
           "nextPage":None,
           "data":search_results
