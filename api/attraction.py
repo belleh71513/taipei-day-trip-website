@@ -1,4 +1,6 @@
+from urllib import request
 from flask import *
+import json
 from modules.get_mysql_data import select_attractions,check_data_count, select_att_id
 
 attractions = Blueprint("attractions", __name__)
@@ -51,12 +53,7 @@ def api_attractions():
           "nextPage":page + 1,
           "data":search_results
         }
-      else:
-        if not len(next_page_results):
-          res = {
-          "nextPage":None,
-          "message":"資料已全部顯示"
-          }
+      else:        
         res = {
           "nextPage":None,
           "data":search_results
