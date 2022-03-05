@@ -35,7 +35,7 @@ def api_attractions():
         }
       # 資料筆數介數<12
       else :
-        # 如果篩選下一頁為0筆，表示搜尋完畢，data null        
+        # 如果篩選下一頁為0筆，表示搜尋完畢，data null
           res = {
             "nextPage":None,
             "data":search_results
@@ -45,13 +45,13 @@ def api_attractions():
       # 沒有輸入欄位的狀況，全部資料一頁一頁顯示
       search_results = select_attractions(page=page,keyword=None)
       next_page_results = select_attractions(page=page+1,keyword=None)
-      
+
       if len(next_page_results) == 12:
         res = {
           "nextPage":page + 1,
           "data":search_results
         }
-      else:        
+      else:
           res = {
             "nextPage":None,
             "data":search_results
@@ -70,16 +70,18 @@ def api_attraction_attractionID(attractionID):
     # SQL中有該id
     if get_att_id:
       res = {
-        "id": get_att_id["id"],
-        "name": get_att_id["name"],
-        "category": get_att_id["category"],
-        "description": get_att_id["description"],
-        "address": get_att_id["address"],
-        "transport": get_att_id["transport"],
-        "mrt": get_att_id["mrt"],
-        "latitude": get_att_id["latitude"],
-        "longitude": get_att_id["longitude"],
-        "images": [get_att_id["images"]]
+          "data":{
+          "id": get_att_id["id"],
+          "name": get_att_id["name"],
+          "category": get_att_id["category"],
+          "description": get_att_id["description"],
+          "address": get_att_id["address"],
+          "transport": get_att_id["transport"],
+          "mrt": get_att_id["mrt"],
+          "latitude": get_att_id["latitude"],
+          "longitude": get_att_id["longitude"],
+          "images": json.loads(get_att_id["images"])
+        }
       }
     else:
       res = {

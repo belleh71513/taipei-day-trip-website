@@ -1,5 +1,6 @@
 import mysql.connector
 from mysql.connector import pooling
+import json
 
 dbconfig = {
   "host":"localhost",
@@ -73,7 +74,7 @@ def get_per_col(results):
       "mrt": result["mrt"],
       "latitude": result["latitude"],
       "longitude": result["longitude"],
-      "images": [result["images"]]
+      "images": json.loads(result["images"])
     }
     data_list.append(data)
   return data_list

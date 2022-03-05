@@ -26,7 +26,7 @@ for item in attractions_list:
     check_type = image[-3:]
     if check_type == "jpg" or check_type == "JPG" or check_type == "png" or check_type == "PNG":
       image_list.append("https"+image)
-      images = json.dumps(image_list)
+  images = json.dumps(image_list)
 
   sql = """INSERT INTO attraction_table
       (name, category, description, address, transport, mrt, latitude, longitude, images)
