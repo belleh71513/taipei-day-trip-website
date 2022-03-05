@@ -7,15 +7,12 @@ attractions = Blueprint("attractions", __name__)
 
 @attractions.route("/attractions")
 def api_attractions():
-
   try:
-
-    page = int(request.args.get("page"))
+    page = int(request.args.get("page")) # 字串轉 INT
     keyword = request.args.get("keyword")
-
     # 如果欄位有輸入資料
     if keyword:
-      # 檢查該keyword有幾筆資料
+      # 檢查該 keyword 有幾筆資料
       search_result_count = check_data_count(keyword)
       # 先處理找不到關鍵字的情況
       if not search_result_count:
@@ -23,45 +20,59 @@ def api_attractions():
           "error":True,
           "message":"查無相關資訊"
         }
-        return jsonify(res)
+        return jsonify(res), 400
       search_results = select_attractions(page=page, keyword=keyword)
       # 檢查是否有下一頁
-      next_page_results = select_attractions(page=page, keyword=keyword)
-      # 如果資料筆數該值==12表示還有下一頁
-      if len(next_page_results) == 12:
+      next_page_results = select_attractions(page=page+1, keyword=keyword)
+      # 如果資料筆數該值 > 0 表示還有下一頁
+      if next_page_results:
         res = {
           "nextPage":page + 1,
           "data":search_results
         }
-      # 資料筆數介數<12
+      # nextpage無資料
       else :
-        # 如果篩選下一頁為0筆，表示搜尋完畢，data null
+        if search_results:
           res = {
-            "nextPage":None,
-            "data":search_results
+          "nextPage":None,
+          "data":search_results
           }
+          return jsonify(res)
+        # 回傳page資料，nextpage 為 None，回傳給前端為 null
+        res = {
+          "nextPage":None,
+          "data":None
+        }
       return jsonify(res)
+    # 沒有輸入關鍵字的處理情境
     else:
-      # 沒有輸入欄位的狀況，全部資料一頁一頁顯示
+      # 因無 keyword 所以參數設為None
       search_results = select_attractions(page=page,keyword=None)
       next_page_results = select_attractions(page=page+1,keyword=None)
 
-      if len(next_page_results) == 12:
+      if next_page_results :
         res = {
           "nextPage":page + 1,
           "data":search_results
         }
+        return jsonify(res)
       else:
+        if search_results:
           res = {
-            "nextPage":None,
-            "data":search_results
+          "nextPage":None,
+          "data":search_results
           }
-      return jsonify(res)
+          return jsonify(res)
+        res = {
+          "nextPage":None,
+          "data":None
+        }
+        return jsonify(res), 400
   except:
     return jsonify({
       "error":True,
       "message":"伺服器發生錯誤"
-    },500)
+    }), 500
 
 @attractions.route("/attraction/<int:attractionID>")
 def api_attraction_attractionID(attractionID):
@@ -83,18 +94,19 @@ def api_attraction_attractionID(attractionID):
           "images": json.loads(get_att_id["images"])
         }
       }
+      return jsonify(res)
     else:
       res = {
         "error": True,
         "message": "景點編號不正確"
       }
-    return jsonify(res)
+      return jsonify(res), 400
   except:
     res = {
       "error": True,
       "message": "伺服器內部錯誤"
     }
-    return jsonify(res)
+    return jsonify(res), 500
 
 
 

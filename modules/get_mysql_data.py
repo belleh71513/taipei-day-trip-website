@@ -24,6 +24,7 @@ def select_attractions(**kwargs):
     page = kwargs["page"] * 12
     keyword = kwargs["keyword"]
     # 如果沒有keyword，顯示所有資料，但每頁最多顯示12筆
+    # 注意因為cursor有dic=True回傳資料type為dict
     if not keyword:
       sql = f"SELECT * FROM attraction_table LIMIT {page},12"
       cursor.execute(sql)
