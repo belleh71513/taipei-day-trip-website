@@ -1,7 +1,7 @@
 from urllib import request
 from flask import *
 import json
-from modules.get_mysql_data import select_attractions,check_data_count, select_att_id
+from modules.get_mysql_data import select_attractions, select_att_id
 
 attractions = Blueprint("attractions", __name__)
 
@@ -9,65 +9,34 @@ attractions = Blueprint("attractions", __name__)
 def api_attractions():
   try:
     page = int(request.args.get("page")) # 字串轉 INT
-    keyword = request.args.get("keyword")
-    # 如果欄位有輸入資料
-    if keyword:
-      # 檢查該 keyword 有幾筆資料
-      search_result_count = check_data_count(keyword)
-      # 先處理找不到關鍵字的情況
-      if not search_result_count:
-        res = {
-          "error":True,
-          "message":"查無相關資訊"
-        }
-        return jsonify(res), 400
+    # 先判斷page，page值從0開始
+    if page >= 0:
+      keyword = request.args.get("keyword") # 未輸入keyword，該值為None
       search_results = select_attractions(page=page, keyword=keyword)
       # 檢查是否有下一頁
       next_page_results = select_attractions(page=page+1, keyword=keyword)
-      # 如果資料筆數該值 > 0 表示還有下一頁
+      # 如果資料筆數該值存在，表示還有下一頁
       if next_page_results:
         res = {
           "nextPage":page + 1,
           "data":search_results
         }
+        return jsonify(res)
       # nextpage無資料
       else :
+        # 如果該頁存在，回傳該page資料
         if search_results:
           res = {
           "nextPage":None,
           "data":search_results
           }
           return jsonify(res)
-        # 回傳page資料，nextpage 為 None，回傳給前端為 null
+        # nextpage不存在且該頁也沒資料
         res = {
           "nextPage":None,
           "data":None
-        }
-      return jsonify(res)
-    # 沒有輸入關鍵字的處理情境
-    else:
-      # 因無 keyword 所以參數設為None
-      search_results = select_attractions(page=page,keyword=None)
-      next_page_results = select_attractions(page=page+1,keyword=None)
-
-      if next_page_results :
-        res = {
-          "nextPage":page + 1,
-          "data":search_results
         }
         return jsonify(res)
-      else:
-        if search_results:
-          res = {
-          "nextPage":None,
-          "data":search_results
-          }
-          return jsonify(res)
-        res = {
-          "nextPage":None,
-          "data":None
-        }
-        return jsonify(res), 400
   except:
     return jsonify({
       "error":True,

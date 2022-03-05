@@ -22,9 +22,9 @@ def select_attractions(**kwargs):
     con = pool.get_connection()
     cursor = con.cursor(dictionary=True)
     page = kwargs["page"] * 12
-    keyword = kwargs["keyword"]
     # 如果沒有keyword，顯示所有資料，但每頁最多顯示12筆
     # 注意因為cursor有dic=True回傳資料type為dict
+    keyword = kwargs["keyword"]
     if not keyword:
       sql = f"SELECT * FROM attraction_table LIMIT {page},12"
       cursor.execute(sql)
@@ -33,6 +33,7 @@ def select_attractions(**kwargs):
       return data
     # 有keyword，將keyword代入
     else:
+      keyword = kwargs["keyword"]
       sql = f"SELECT * FROM attraction_table WHERE name LIKE '%{keyword}%' LIMIT {page},12"
       cursor.execute(sql)
       results = cursor.fetchall()
@@ -46,20 +47,20 @@ def select_attractions(**kwargs):
     con.close()
 
 # 檢查keyword在SQL中有幾筆，dic模式不是True所以回傳的是tuple
-def check_data_count(keyword):
-  try:
-    con = pool.get_connection()
-    cursor = con.cursor()
-    sql_count = f" SELECT COUNT(*) FROM attraction_table WHERE name LIKE '%{keyword}%' "
-    cursor.execute(sql_count)
-    count = cursor.fetchone()[0]
-    return count
-  except:
-    print("Can not check")
-  finally:
-    if con.in_transaction:
-      con.rollback()
-    con.close()
+# def check_data_count(keyword):
+#   try:
+#     con = pool.get_connection()
+#     cursor = con.cursor()
+#     sql_count = f" SELECT COUNT(*) FROM attraction_table WHERE name LIKE '%{keyword}%' "
+#     cursor.execute(sql_count)
+#     count = cursor.fetchone()[0]
+#     return count
+#   except:
+#     print("Can not check")
+#   finally:
+#     if con.in_transaction:
+#       con.rollback()
+#     con.close()
 
 # 將篩選出的資料(type:dic)整理並放入list中
 def get_per_col(results):
