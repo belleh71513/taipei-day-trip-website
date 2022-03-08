@@ -13,6 +13,7 @@ dbconfig = {
   "password":os.getenv("db_password"),
   "database":os.getenv("db_database")
 }
+
 pool = mysql.connector.pooling.MySQLConnectionPool(
   pool_name = "my_pool",
   pool_size = 5,
@@ -28,6 +29,7 @@ def select_attractions(**kwargs):
     page = kwargs["page"] * 12
     # 如果沒有keyword，顯示所有資料，但每頁最多顯示12筆
     # 注意因為cursor有dic=True回傳資料type為dict
+    keyword = kwargs["keyword"]
     if not keyword:
       sql = f"SELECT * FROM attraction_table LIMIT {page},12"
       cursor.execute(sql)
@@ -36,14 +38,13 @@ def select_attractions(**kwargs):
       return data
     # 有keyword，將keyword代入
     else:
-      keyword = kwargs["keyword"]
       sql = f"SELECT * FROM attraction_table WHERE name LIKE '%{keyword}%' LIMIT {page},12"
       cursor.execute(sql)
       results = cursor.fetchall()
       data = get_per_col(results)
       return data
   except :
-    print("error")
+    print("error1")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -94,7 +95,7 @@ def select_att_id(att_id):
     result = cursor.fetchone()
     return result
   except :
-    print("error")
+    print("error2")
   finally:
     if con.in_transaction:
       con.rollback()
