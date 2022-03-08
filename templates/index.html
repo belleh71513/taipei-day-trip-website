@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/index.css') }}">
 
 </head>
 <body>
@@ -31,114 +31,21 @@
         <div class="leftnContent">探索每個角落，體驗城市的深度旅遊行程</div>
         <div class="leftInputContainer">
           <input id="leftInput" type="text" placeholder="輸入景點名稱查詢">
-          <input id="inputImg" type="button" value="">
+          <input id="inputVal" type="submit" name="keyword"  value="">
         </div>
       </div>
     </section>
 
     <section class="secondSection">
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
-      <div class="gridBox">
-        <div class="boxImg"><img src="https://picsum.photos/400/300?random=1"></div>
-        <div class="boxText">
-          <div class="arrName">平安鐘</div>
-          <div class="arrTransport">忠孝復興</div>
-          <div class="arrType">公共藝術</div>
-        </div class="boxText">
-      </div>
+
     </section>
   </main>
 
   <footer>
      <p>COPYRIGHT &copy; 2021 台北一日遊</p>
   </footer>
+
+  <script src="{{ url_for('static', filename='/js/index.js') }}"></script>
 
 </body>
 </html>
