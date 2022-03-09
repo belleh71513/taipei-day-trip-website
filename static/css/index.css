@@ -121,13 +121,15 @@ nav a {
   background-color: #fff;
   max-width: 1200px;
   grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 15px;
   justify-items: center;
   align-items: center;
 }
 
 .gridBox {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   border: 1px solid #e8e8e8;
   border-radius: 5px;
 }
@@ -140,12 +142,12 @@ nav a {
 .boxText {
   background-color: #fff;
   display: grid;
-  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  grid-template: 1fr/ 1fr;
   grid-row-gap: 5px;
 }
 
 .attName {
-  grid-column: 1 / 3;
+  grid-column: 1;
   grid-row: 1;
   padding: 0.1rem;
   font-family: "Noto Sans TC", sans-serif;
@@ -212,41 +214,36 @@ footer {
 
   .secondSection {
     margin: 10px 10px;
-    max-width: 1200px;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 5px;
+    grid-gap: 10px;
   }
 
   .gridBox {
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
+    width: 90%;
+    margin: 10px;
   }
-
-  .boxImg img {
-    width: 100%;
+  .boxImg {
+    object-fit: cover;
   }
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 415px) {
   .firstSection {
     height: 280px;
     margin: 0 auto;
     background-size: 80%, 100%;
-    background-position: top 100% left 120%;
+    background-position: top 120% left 150%;
   }
 
   #leftInput {
     width: 230px;
   }
 
-  #inputImg {
-    position: absolute;
+  #inputVal {
     left: 230px;
   }
 
   .secondSection {
-    margin: 30px 20px;
+    margin: 20px 10px 10px 10px;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
   }
