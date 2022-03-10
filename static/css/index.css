@@ -52,6 +52,11 @@ nav a {
   color: #666666;
 }
 
+main {
+  margin: 0 auto;
+  min-height: calc(100vh - 100px);
+}
+
 .firstSection {
   display: flex;
   height: 320px;
@@ -60,7 +65,8 @@ nav a {
   background: url("../img/main_bgc_img.png"),
     linear-gradient(135deg, #aaddee 0%, #66aabb 100%);
   background-repeat: no-repeat;
-  background-position: top 0 right 20%;
+  background-position: top 60px right 1%;
+  background-size: contain;
 }
 
 .sectionLeft {
@@ -86,7 +92,7 @@ nav a {
   position: relative;
 }
 
-#leftInput {
+#inputVal {
   border: 0;
   width: 400px;
   height: 46px;
@@ -95,13 +101,13 @@ nav a {
   outline: none;
 }
 
-#leftInput[placeholder] {
+#inputVal[placeholder] {
   font-family: "Noto Sans TC", sans-serif;
   font-weight: bold;
   font-size: 1rem;
 }
 
-#inputVal {
+#inputBtn {
   position: absolute;
   left: 400px;
   background: url("../img/button_icon.png"), #448899;
@@ -120,8 +126,8 @@ nav a {
   margin: 50px auto;
   background-color: #fff;
   max-width: 1200px;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-gap: 15px;
   justify-items: center;
   align-items: center;
@@ -129,7 +135,8 @@ nav a {
 
 .gridBox {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   border: 1px solid #e8e8e8;
   border-radius: 5px;
 }
@@ -141,15 +148,16 @@ nav a {
 
 .boxText {
   background-color: #fff;
+  height: 80px;
   display: grid;
   grid-template: 1fr/ 1fr;
-  grid-row-gap: 5px;
+  /* grid-row-gap: 5px; */
 }
 
 .attName {
   grid-column: 1;
   grid-row: 1;
-  padding: 0.1rem;
+  padding: 0.2rem;
   font-family: "Noto Sans TC", sans-serif;
   font-size: 1rem;
   font-weight: bold;
@@ -159,7 +167,7 @@ nav a {
 .attTransport {
   grid-column: 1;
   grid-row: 2;
-  padding: 0.1rem;
+  padding: 0.2rem;
   font-family: "Noto Sans TC", sans-serif;
   font-size: 1rem;
   color: #757575;
@@ -168,11 +176,18 @@ nav a {
 .attCategory {
   grid-column: 2;
   grid-row: 2;
-  padding: 0.1rem;
+  padding: 0.2rem;
   justify-self: end;
   font-family: "Noto Sans TC", sans-serif;
   font-size: 1rem;
   color: #757575;
+}
+
+.secondSection h1 {
+  font-size: 3rem;
+  grid-column: 1/-1;
+  grid-row: 1;
+  place-self: center;
 }
 
 footer {
@@ -191,10 +206,6 @@ footer {
 @media screen and (max-width: 1200px) {
   header .headerContainer {
     padding: 10px 10px;
-  }
-
-  main {
-    margin: 0 auto;
   }
 
   .sectionLeft {
@@ -234,11 +245,11 @@ footer {
     background-position: top 120% left 150%;
   }
 
-  #leftInput {
+  #inputVal {
     width: 230px;
   }
 
-  #inputVal {
+  #inputBtn {
     left: 230px;
   }
 
