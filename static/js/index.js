@@ -1,15 +1,15 @@
 
 const secondSection = document.querySelector(".secondSection");
-const observerTarget = document.querySelector(".observerTarget");
+const footer = document.querySelector("footer");
 const inputBtn = document.querySelector("#inputBtn");
 
-let page;
+
+// page從 0 開始搜尋
+let page = 0 ;
 let keyword = null;
 let nextPage;
 
 async function getData(){
-  // keyword = document.querySelector("#inputVal").value
-  page = 0
   let url ;
   if(keyword){
     url = `/api/attractions?page=${page}&keyword=${keyword}`
@@ -54,45 +54,46 @@ async function getData(){
     gridBox.append(boxImg, boxText);
     secondSection.appendChild(gridBox);
     }
-  }else if(nextPage === null && page === null){
+  }else if(nextPage === null){
     searchMessage = document.createElement("h1");
     searchMessage.textContent = `找不到《${keyword}》相關資訊`
     secondSection.appendChild(searchMessage);
   }
   page = nextPage
+  console.log(page)
 }
-
-getData();
-
 
 
 const options = {
-  rootMargin: "0px 0px 10px 0px",
+  rootMargin: "0px 0px 20px 0px",
   threshold:0
 }
-
 const callback = (entries, observer) => {
-  console.log(nextPage)
-  console.log(entries)
+
   entries.forEach(entry => {
-    if(entry.intersectionRatio > 0 && nextPage){
+    if(entry.intersectionRatio > 0 && page){
       getData();
     }
   });
 }
 let observer = new IntersectionObserver(callback, options)
-observer.observe(observerTarget)
+observer.observe(footer)
 
-const searchAttraction = () => {
+
+const searchAttraction = (e) => {
+  // if(page === null){ page = 0}
+  page=0
   keyword = document.querySelector("#inputVal").value
   if(secondSection.innerHTML && keyword){
     secondSection.innerHTML = "";
     console.log(page, keyword)
     getData();
+    e.stopPropagation()
   }
 }
 
+getData();
 
-inputBtn.addEventListener("click",searchAttraction);
+inputBtn.addEventListener("click", searchAttraction);
 
 

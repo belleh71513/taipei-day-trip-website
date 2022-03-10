@@ -263,4 +263,8 @@ footer {
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
   }
+
+  .secondSection h1 {
+    font-size: 2rem;
+  }
 }
