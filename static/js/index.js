@@ -11,20 +11,19 @@ let nextPage;
 
 async function getData(){
   let url ;
+  // 判斷有無 keyword 決定fetch 的網址
   if(keyword){
     url = `/api/attractions?page=${page}&keyword=${keyword}`
   }else{
     url = `/api/attractions?page=${page}`
   }
-  console.log(url)
   const response = await fetch(url);
   const data = await response.json();
   let attData = data.data;
   nextPage = data.nextPage;
+  // 有資料就渲染頁面
   if (attData){
-    console.log(attData)
     for(let item of attData){
-    console.log(item.name)
     gridBox = document.createElement("div");
     gridBox.classList.add("gridBox")
 
@@ -54,13 +53,13 @@ async function getData(){
     gridBox.append(boxImg, boxText);
     secondSection.appendChild(gridBox);
     }
-  }else if(nextPage === null){
+  }else{ // 沒有資料就回應找不到的訊息
     searchMessage = document.createElement("h1");
     searchMessage.textContent = `找不到《${keyword}》相關資訊`
     secondSection.appendChild(searchMessage);
   }
+  // 記錄下一頁的資料
   page = nextPage
-  console.log(page)
 }
 
 
@@ -81,12 +80,11 @@ observer.observe(footer)
 
 
 const searchAttraction = (e) => {
-  // if(page === null){ page = 0}
+  // 從 page 0 開始搜尋
   page=0
   keyword = document.querySelector("#inputVal").value
   if(secondSection.innerHTML && keyword){
     secondSection.innerHTML = "";
-    console.log(page, keyword)
     getData();
     e.stopPropagation()
   }
