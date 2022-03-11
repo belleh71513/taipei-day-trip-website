@@ -1,0 +1,270 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+img {
+  vertical-align: top;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  height: 58px;
+  z-index: 1;
+  box-shadow: 1px 1px 1px 1px rgb(0, 0, 0, 0.5);
+}
+
+header .headerContainer {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5px 0;
+  color: #448899;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .ContainerText {
+  width: 150px;
+  font-size: 1.875rem;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  padding: 10px 10px;
+}
+
+nav a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #666666;
+}
+
+main {
+  margin: 0 auto;
+  min-height: calc(100vh - 100px);
+}
+
+.firstSection {
+  display: flex;
+  height: 320px;
+  justify-content: center;
+  align-items: center;
+  background: url("../img/main_bgc_img.png"),
+    linear-gradient(135deg, #aaddee 0%, #66aabb 100%);
+  background-repeat: no-repeat;
+  background-position: top 60px right 20%;
+  background-size: contain;
+}
+
+.sectionLeft {
+  width: 1200px;
+}
+
+.leftTitle {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1.75rem;
+  color: #f8f8f8;
+  margin-bottom: 10px;
+}
+
+.leftnContent {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1rem;
+  color: #f8f8f8;
+  margin-bottom: 10px;
+}
+
+.leftInputContainer {
+  display: flex;
+  position: relative;
+}
+
+#inputVal {
+  border: 0;
+  width: 400px;
+  height: 46px;
+  border-radius: 5px 0 0 5px;
+  padding: 15px;
+  outline: none;
+}
+
+#inputVal[placeholder] {
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+#inputBtn {
+  position: absolute;
+  left: 400px;
+  background: url("../img/button_icon.png"), #448899;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+  width: 60px;
+  height: 46px;
+  border: 0;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.secondSection {
+  display: grid;
+  margin: 50px auto;
+  background-color: #fff;
+  max-width: 1200px;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 15px;
+  justify-items: center;
+  align-items: center;
+}
+
+.gridBox {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+}
+
+.boxImg img {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.boxText {
+  background-color: #fff;
+  height: 80px;
+  display: grid;
+  grid-template: 1fr/ 1fr;
+  /* grid-row-gap: 5px; */
+}
+
+.attName {
+  grid-column: 1;
+  grid-row: 1;
+  padding: 0.2rem;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #757575;
+}
+
+.attTransport {
+  grid-column: 1;
+  grid-row: 2;
+  padding: 0.2rem;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1rem;
+  color: #757575;
+}
+
+.attCategory {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 0.2rem;
+  justify-self: end;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1rem;
+  color: #757575;
+}
+
+.secondSection h1 {
+  font-size: 3rem;
+  grid-column: 1/-1;
+  grid-row: 1;
+  place-self: center;
+}
+
+footer {
+  display: flex;
+  background: #757575;
+  width: 100%;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 1200px) {
+  header .headerContainer {
+    padding: 10px 10px;
+  }
+
+  .sectionLeft {
+    padding: 10px 10px;
+  }
+
+  .secondSection {
+    margin: 30px 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .firstSection {
+    background-size: 65%, 100%;
+    background-position: top 100% left 120%;
+  }
+
+  .secondSection {
+    margin: 10px 10px;
+    grid-gap: 10px;
+  }
+
+  .gridBox {
+    width: 90%;
+    margin: 10px;
+  }
+  .boxImg {
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  header .headerContainer {
+    font-size: 0.7rem;
+  }
+
+  .firstSection {
+    height: 280px;
+    margin: 0 auto;
+    background-size: 80%, 100%;
+    background-position: top 120% left 150%;
+  }
+
+  #inputVal {
+    width: 230px;
+  }
+
+  #inputBtn {
+    left: 230px;
+  }
+
+  .secondSection {
+    margin: 20px 10px 10px 10px;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .secondSection h1 {
+    font-size: 2rem;
+  }
+}

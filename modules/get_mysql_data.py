@@ -1,12 +1,17 @@
+from distutils.command.config import config
 import mysql.connector
 from mysql.connector import pooling
+from dotenv import load_dotenv
+import os
 import json
 
+load_dotenv()
+
 dbconfig = {
-  "host":"localhost",
-  "user":"root",
-  "password":"password",
-  "database":"taipei_website"
+  "host":os.getenv("db_host"),
+  "user":os.getenv("db_user"),
+  "password":os.getenv("db_password"),
+  "database":os.getenv("db_database")
 }
 
 pool = mysql.connector.pooling.MySQLConnectionPool(
@@ -33,14 +38,13 @@ def select_attractions(**kwargs):
       return data
     # 有keyword，將keyword代入
     else:
-      keyword = kwargs["keyword"]
       sql = f"SELECT * FROM attraction_table WHERE name LIKE '%{keyword}%' LIMIT {page},12"
       cursor.execute(sql)
       results = cursor.fetchall()
       data = get_per_col(results)
       return data
   except :
-    print("Can not select")
+    print("error1")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -91,7 +95,7 @@ def select_att_id(att_id):
     result = cursor.fetchone()
     return result
   except :
-    print("Can not select")
+    print("error2")
   finally:
     if con.in_transaction:
       con.rollback()
