@@ -19,7 +19,7 @@ header {
   background-color: #fff;
   height: 58px;
   z-index: 1;
-  box-shadow: 1px 1px 1px 1px rgb(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 header .headerContainer {
@@ -81,7 +81,7 @@ main {
   margin-bottom: 10px;
 }
 
-.leftnContent {
+.leftContent {
   font-family: "Noto Sans TC", sans-serif;
   font-size: 1rem;
   color: #f8f8f8;
@@ -120,6 +120,12 @@ main {
   border: 0;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
+  transition: all, 0.5s, linear, 0.2s;
+}
+
+#inputBtn:hover{
+  width:65px;
+  background-color:#086d68;
 }
 
 .secondSection {

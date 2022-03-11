@@ -1,21 +1,23 @@
 
 const secondSection = document.querySelector(".secondSection");
 const footer = document.querySelector("footer");
-const inputBtn = document.querySelector("#inputBtn");
 
 
 // page從 0 開始搜尋
 let page = 0 ;
+// 未進行搜尋功能時，keyword 設為 null
 let keyword = null;
 let nextPage;
+// let url ;
+let fetching = false ;
 
 async function getData(){
-  let url ;
-  // 判斷有無 keyword 決定fetch 的網址
+  fetching = true;
+  // 判斷有無 keyword 決定 fetch 的網址
   if(keyword){
-    url = `/api/attractions?page=${page}&keyword=${keyword}`
+    url = `/api/attractions?page=${page}&keyword=${keyword}`;
   }else{
-    url = `/api/attractions?page=${page}`
+    url = `/api/attractions?page=${page}`;
   }
   const response = await fetch(url);
   const data = await response.json();
@@ -25,7 +27,7 @@ async function getData(){
   if (attData){
     for(let item of attData){
     gridBox = document.createElement("div");
-    gridBox.classList.add("gridBox")
+    gridBox.classList.add("gridBox");
 
     boxImg = document.createElement("div");
     boxImg.classList.add("boxImg");
@@ -55,43 +57,61 @@ async function getData(){
     }
   }else{ // 沒有資料就回應找不到的訊息
     searchMessage = document.createElement("h1");
-    searchMessage.textContent = `找不到《${keyword}》相關資訊`
+    searchMessage.textContent = `找不到《${keyword}》相關資訊`;
     secondSection.appendChild(searchMessage);
   }
   // 記錄下一頁的資料
-  page = nextPage
+  page = nextPage;
+  fetching = false ;
 }
-
 
 const options = {
   rootMargin: "0px 0px 20px 0px",
   threshold:0
-}
+};
 const callback = (entries, observer) => {
-
+  fetching = true;
   entries.forEach(entry => {
     if(entry.intersectionRatio > 0 && page){
       getData();
     }
-  });
-}
-let observer = new IntersectionObserver(callback, options)
+    else if(page === null){
+      observer.unobserve(footer);
+    }
+  })
+  fetching = false
+}  
+
+const observer = new IntersectionObserver(callback, options)
 observer.observe(footer)
 
 
 const searchAttraction = (e) => {
+  e.preventDefault()
   // 從 page 0 開始搜尋
-  page=0
-  keyword = document.querySelector("#inputVal").value
+  page = 0;
+  keyword = document.querySelector("#inputVal").value;
   if(secondSection.innerHTML && keyword){
-    secondSection.innerHTML = "";
-    getData();
+    secondSection.innerHTML = ""
+    getData()
     e.stopPropagation()
   }
+};
+
+const searchAttractionKeypress = (e) => {
+  if (e.keyCode == 13) {
+    searchAttraction(e)
+  }else{return}
 }
 
 getData();
 
+const inputVal = document.querySelector("#inputVal");
+const inputBtn = document.querySelector("#inputBtn");
+
+
 inputBtn.addEventListener("click", searchAttraction);
+inputVal.addEventListener("keydown", searchAttractionKeypress);
+
 
 
