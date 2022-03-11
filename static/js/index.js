@@ -70,17 +70,21 @@ const options = {
   threshold:0
 };
 const callback = (entries, observer) => {
-  fetching = true;
-  entries.forEach(entry => {
-    if(entry.intersectionRatio > 0 && page){
-      getData();
-    }
-    else if(page === null){
-      observer.unobserve(footer);
-    }
-  })
-  fetching = false
-}  
+  console.log(entries, page)
+  if(!fetching){
+    entries.forEach(entry => {
+      if(entry.intersectionRatio > 0 && page){
+        getData();
+      }
+      else if(page === null){
+        observer.unobserve(footer);
+      }
+    })
+  }else{
+    return
+  }
+
+}
 
 const observer = new IntersectionObserver(callback, options)
 observer.observe(footer)
