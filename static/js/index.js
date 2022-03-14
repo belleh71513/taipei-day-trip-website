@@ -1,5 +1,5 @@
 
-const secondSection = document.querySelector(".secondSection");
+const secondSection = document.querySelector(".second-section");
 const footer = document.querySelector("footer");
 
 
@@ -27,27 +27,27 @@ async function getData(){
   if (attData){
     for(let item of attData){
     gridBox = document.createElement("div");
-    gridBox.classList.add("gridBox");
+    gridBox.classList.add("grid-box");
 
     boxImg = document.createElement("div");
-    boxImg.classList.add("boxImg");
+    boxImg.classList.add("box-img");
 
     img = document.createElement("img");
     img.src = item.images[0];
 
     boxText = document.createElement("div");
-    boxText.classList.add("boxText");
+    boxText.classList.add("box-text");
 
     attName = document.createElement("div");
-    attName.classList.add("attName");
+    attName.classList.add("att-name");
     attName.textContent = item["name"];
 
     attTransport = document.createElement("div");
-    attTransport.classList.add("attTransport");
+    attTransport.classList.add("att-transport");
     attTransport.textContent = item["mrt"];
 
     attCategory = document.createElement("div");
-    attCategory.classList.add("attCategory");
+    attCategory.classList.add("att-category");
     attCategory.textContent = item["category"];
 
     boxText.append(attName, attTransport, attCategory);
@@ -94,7 +94,7 @@ const searchAttraction = (e) => {
   e.preventDefault()
   // 從 page 0 開始搜尋
   page = 0;
-  keyword = document.querySelector("#inputVal").value;
+  keyword = inputVal.value;
   if(secondSection.innerHTML && keyword){
     secondSection.innerHTML = ""
     getData()
@@ -110,8 +110,8 @@ const searchAttractionKeypress = (e) => {
 
 getData();
 
-const inputVal = document.querySelector("#inputVal");
-const inputBtn = document.querySelector("#inputBtn");
+const inputVal = document.querySelector("#input-val");
+const inputBtn = document.querySelector("#input-btn");
 
 
 inputBtn.addEventListener("click", searchAttraction);

@@ -22,7 +22,7 @@ header {
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
-header .headerContainer {
+header .header-container {
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
@@ -32,7 +32,7 @@ header .headerContainer {
   align-items: center;
 }
 
-header .ContainerText {
+header .header-text {
   width: 150px;
   font-size: 1.875rem;
   font-weight: bold;
@@ -58,7 +58,7 @@ main {
   min-height: calc(100vh - 100px);
 }
 
-.firstSection {
+.first-section {
   display: flex;
   height: 320px;
   justify-content: center;
@@ -70,30 +70,30 @@ main {
   background-size: contain;
 }
 
-.sectionLeft {
+.section-left {
   width: 1200px;
 }
 
-.leftTitle {
+.left-title {
   font-family: "Noto Sans TC", sans-serif;
   font-size: 1.75rem;
   color: #f8f8f8;
   margin-bottom: 10px;
 }
 
-.leftContent {
+.left-content {
   font-family: "Noto Sans TC", sans-serif;
   font-size: 1rem;
   color: #f8f8f8;
   margin-bottom: 10px;
 }
 
-.leftInputContainer {
+.left-input-container {
   display: flex;
   position: relative;
 }
 
-#inputVal {
+#input-val {
   border: 0;
   width: 400px;
   height: 46px;
@@ -102,13 +102,13 @@ main {
   outline: none;
 }
 
-#inputVal[placeholder] {
+#input-val[placeholder] {
   font-family: "Noto Sans TC", sans-serif;
   font-weight: bold;
   font-size: 1rem;
 }
 
-#inputBtn {
+#input-btn {
   position: absolute;
   left: 400px;
   background: url("../img/button_icon.png"), #448899;
@@ -123,12 +123,12 @@ main {
   transition: all, 0.5s, linear, 0.2s;
 }
 
-#inputBtn:hover{
-  width:65px;
-  background-color:#086d68;
+#input-btn:hover {
+  width: 65px;
+  background-color: #086d68;
 }
 
-.secondSection {
+.second-section {
   display: grid;
   margin: 50px auto;
   background-color: #fff;
@@ -140,7 +140,7 @@ main {
   align-items: center;
 }
 
-.gridBox {
+.grid-box {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -148,12 +148,12 @@ main {
   border-radius: 5px;
 }
 
-.boxImg img {
+.box-img img {
   width: 100%;
   aspect-ratio: 16/9;
 }
 
-.boxText {
+.box-text {
   background-color: #fff;
   height: 80px;
   display: grid;
@@ -161,7 +161,7 @@ main {
   /* grid-row-gap: 5px; */
 }
 
-.attName {
+.att-name {
   grid-column: 1;
   grid-row: 1;
   padding: 0.2rem;
@@ -171,7 +171,7 @@ main {
   color: #757575;
 }
 
-.attTransport {
+.att-transport {
   grid-column: 1;
   grid-row: 2;
   padding: 0.2rem;
@@ -180,7 +180,7 @@ main {
   color: #757575;
 }
 
-.attCategory {
+.att-category {
   grid-column: 2;
   grid-row: 2;
   padding: 0.2rem;
@@ -190,7 +190,7 @@ main {
   color: #757575;
 }
 
-.secondSection h1 {
+.second-section h1 {
   font-size: 3rem;
   grid-column: 1/-1;
   grid-row: 1;
@@ -211,66 +211,66 @@ footer {
 }
 
 @media screen and (max-width: 1200px) {
-  header .headerContainer {
+  header .header-container {
     padding: 10px 10px;
   }
 
-  .sectionLeft {
+  .section-left {
     padding: 10px 10px;
   }
 
-  .secondSection {
+  .second-section {
     margin: 30px 20px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .firstSection {
+  .first-section {
     background-size: 65%, 100%;
     background-position: top 100% left 120%;
   }
 
-  .secondSection {
+  .second-section {
     margin: 10px 10px;
     grid-gap: 10px;
   }
 
-  .gridBox {
+  .grid-box {
     width: 90%;
     margin: 10px;
   }
-  .boxImg {
+  .box-img {
     object-fit: cover;
   }
 }
 
 @media screen and (max-width: 415px) {
-  header .headerContainer {
+  header .header-container {
     font-size: 0.7rem;
   }
 
-  .firstSection {
+  .first-section {
     height: 280px;
     margin: 0 auto;
     background-size: 80%, 100%;
     background-position: top 120% left 150%;
   }
 
-  #inputVal {
+  #input-val {
     width: 230px;
   }
 
-  #inputBtn {
+  #input-btn {
     left: 230px;
   }
 
-  .secondSection {
+  .second-section {
     margin: 20px 10px 10px 10px;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
   }
 
-  .secondSection h1 {
+  .second-section h1 {
     font-size: 2rem;
   }
 }
