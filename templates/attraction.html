@@ -5,8 +5,81 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>台北一日遊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/attraction.css"
 </head>
 <body>
+  <header>
+    <div class="header-container">
+      <div class="header-text"><a href="/">台北一日遊</a></div>
+      <nav>
+        <ul>
+          <li><a href="#">預定行程</a></li>
+          <li><a href="#">登入/註冊</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
+  <main>
+    <section class="img-area">
+      <div class="img-attraction">
+        <img src="https://picsum.photos/seed/picsum/400/300" alt="">
+        <img src="https://picsum.photos/seed/picsum/300/300" alt="">
+        <img src="https://picsum.photos/seed/picsum/600/300" alt="">
+        <div class="arrow-container">
+          <div class="img-arrow-pre"><img src="../static/img/btn_leftArrow.png" alt=""></div>
+          <div class="img-arrow-next"><img class="img-arrow" src="../static/img/btn_rightArrow.png" alt=""></div>
+        </div>
+      </div>
+      <div class="slide-icon-wrap">
+        <div class="slide-icon"></div>
+        <div class="slide-icon"></div>
+        <div class="slide-icon"></div>
+      </div>
+    </section>
+    <section class="booking-info-introduce">
+      <article class="attraction-booking-menu">
+        <div class="attraction-name">平安鐘</div>
+        <div class="attraction-category-mrt booking-secondary-type">公共藝術 at 忠孝復興</div>
+      </article>
+      <div class="booking-area">
+        <div class="booking-area-title booking-main-type">訂購導覽行程</div>
+        <div class="booking-area-subtitle booking-secondary-type">以此景點為中心的一日行程，帶您探索城市角落故事</div>
+        <div class="booking-area-date booking-main-type">選擇日期 :
+          <input type="date" id=""></div>
+        <div class="booking-area-time booking-main-type">選擇時間 :
+          <input class="booking-time-radio"type="radio">
+          <div class="booking-secondary-type">上半天</div>
+          <input class="booking-secondary-type booking-time-radio" type="radio">
+          <div class="booking-secondary-type">下半天</div>
+        </div>
+        <div class="booking-cost booking-main-type">導覽費用 :
+          <div class="booking-price booking-secondary-type">新台幣 2000 元</div>
+        </div>
+        <button class="booking-btn" >開始預訂行程</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="line"></div>
+
+  <section class="attraction-info">
+    <div class="attraction-xbody">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque amet animi, molestiae necessitatibus ipsa magnam natus, labore quia excepturi vitae consectetur facere, doloremque ex unde vel aspernatur nobis. Quae, facilis.</div>
+    <div class="attraction-address-title">
+      <h4>景點地址 : </h4>
+      <div class="attraction-address-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo, possimus quos. Saepe illum sed similique eum mollitia ea incidunt molestias labore aliquam odio aspernatur maiores enim, dicta velit. Tempora, laboriosam.</div>
+    </div>
+    <div class="attraction-transport-title">
+      <h4>交通方式 : </h4>
+      <div class="attraction-transport-content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere error maxime nisi aliquid aliquam, eius, beatae placeat dignissimos quidem aut a! Odio molestias facilis autem voluptas explicabo. In, ut dolores.</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>COPYRIGHT &copy; 2021 台北一日遊</p>
+ </footer>
 </body>
 </html>
