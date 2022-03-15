@@ -165,11 +165,46 @@ main {
   column-gap: 10px;
 }
 
-input[type="radio"]::before {
-  background-color: #fff;
+input[type="radio"] {
+  visibility: hidden;
 }
-input[type="radio"]:checked::after {
+
+.radio-label {
+  cursor: pointer;
+  position: relative;
+}
+
+.radio-btn {
+  height: 20px;
+  width: 20px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  left: -25px;
+  top: 5px;
+  background: #fff;
+}
+
+.radio-btn::after {
+  /* 中間點點 */
+  content: "";
+  display: block;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #448899;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.radio-input:checked + .radio-label .radio-btn::after {
+  /* 選中radio時 才顯示中間點點 */
+  opacity: 1;
 }
 
 .booking-cost {
@@ -291,7 +326,11 @@ footer {
     flex: 0.8;
   }
 
-  .action-booking-menu-info {
+  .booking-info-introduce {
+    margin: 0 auto;
+  }
+
+  .attraction-booking-menu {
     margin: 0;
   }
 
@@ -301,8 +340,15 @@ footer {
 }
 
 @media screen and (max-width: 415px) {
-  header .header-text {
-    font-size: 0.8rem;
+  main {
+    height: 65vh;
+  }
+  header .header-container {
+    padding: 5px 5px;
+  }
+
+  header .header-text a {
+    font-size: 1.5rem;
   }
 
   nav a {
