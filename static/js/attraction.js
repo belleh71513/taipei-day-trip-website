@@ -97,8 +97,24 @@ arrowNext.addEventListener("click", ()=>{
   }
   slideImg[count].classList.remove("hidden");
   slideIcon[count].classList.add("hidden");
-  console.log(slideImg)
+})
 
+arrowPre.addEventListener("click", ()=>{
+  const slideImg = document.querySelectorAll(".slide-img")
+  const slideIcon = document.querySelectorAll(".slide-icon");
+  count --;
+  slideImg.forEach((img) =>{
+    img.classList.add("hidden")
+  })
+  slideIcon.forEach((icon) =>{
+    icon.classList.remove("hidden")
+  })
+
+  if(count < 0 ){
+    count = slideImg.length-1;
+  }
+  slideImg[count].classList.remove("hidden");
+  slideIcon[count].classList.add("hidden");
 })
 
 

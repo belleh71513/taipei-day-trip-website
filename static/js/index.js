@@ -75,7 +75,6 @@ const options = {
   threshold:0
 };
 const callback = (entries, observer) => {
-  console.log(entries, page)
   if(!fetching){
     entries.forEach(entry => {
       if(entry.intersectionRatio > 0 && page){
