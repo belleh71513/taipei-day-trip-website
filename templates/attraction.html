@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../static/css/attraction.css"
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/attraction.css') }}"
 </head>
 <body>
   <header>
@@ -26,24 +26,27 @@
   <main>
     <section class="img-area">
       <div class="img-attraction">
-        <img src="https://picsum.photos/seed/picsum/400/300" alt="">
-        <img src="https://picsum.photos/seed/picsum/300/300" alt="">
-        <img src="https://picsum.photos/seed/picsum/600/300" alt="">
+        <div class="img-container">
+          <!-- 景點圖片  -->
+        </div>
         <div class="arrow-container">
-          <div class="img-arrow-pre"><img src="../static/img/btn_leftArrow.png" alt=""></div>
-          <div class="img-arrow-next"><img class="img-arrow" src="../static/img/btn_rightArrow.png" alt=""></div>
+          <div class="img-arrow-pre"><img src="{{ url_for('static', filename='/img/btn_leftArrow.png') }}" alt=""></div>
+          <div class="img-arrow-next"><img class="img-arrow" src="{{ url_for('static', filename='/img/btn_rightArrow.png') }}" alt=""></div>
+          </div>
         </div>
       </div>
       <div class="slide-icon-wrap">
-        <div class="slide-icon"></div>
-        <div class="slide-icon"></div>
-        <div class="slide-icon"></div>
+        <!-- 景點下方圓點與箭頭連動 -->
       </div>
     </section>
     <section class="booking-info-introduce">
       <article class="attraction-booking-menu">
-        <div class="attraction-name">平安鐘</div>
-        <div class="attraction-category-mrt booking-secondary-type">公共藝術 at 忠孝復興</div>
+        <div class="attraction-name">
+          <!-- 景點名稱 -->
+        </div>
+        <div class="attraction-category-mrt booking-secondary-type">
+          <!-- 景點介紹、mr資訊 -->
+        </div>
       </article>
       <div class="booking-area">
         <div class="booking-area-title booking-main-type">訂購導覽行程</div>
@@ -52,12 +55,14 @@
           <input type="date" id=""></div>
         <div class="booking-area-time booking-main-type">選擇時間 :
           <input class="booking-time-radio radio-input" type="radio" id="am" name="time">
-          <label class="booking-secondary-type radio-label" for="am"><span class="radio-btn"></span>上半天</label>
+          <label class="booking-secondary-type radio-label am-label" for="am"><span class="radio-btn"></span>上半天</label>
           <input class="booking-time-radio radio-input" type="radio" id="pm" name="time">
-          <label class="booking-secondary-type radio-label" for="pm"><span class="radio-btn"></span>下半天</label>
+          <label class="booking-secondary-type radio-label " for="pm"><span class="radio-btn"></span>下半天</label>
         </div>
         <div class="booking-cost booking-main-type">導覽費用 :
-          <div class="booking-price booking-secondary-type">新台幣 2000 元</div>
+          <div class="booking-price booking-secondary-type">
+            <!-- 費用 -->
+          </div>
         </div>
         <button class="booking-btn" >開始預訂行程</button>
       </div>
@@ -67,19 +72,27 @@
   <div class="line"></div>
 
   <section class="attraction-info">
-    <div class="attraction-xbody">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque amet animi, molestiae necessitatibus ipsa magnam natus, labore quia excepturi vitae consectetur facere, doloremque ex unde vel aspernatur nobis. Quae, facilis.</div>
+    <div class="attraction-description">
+      <!-- 景點詳細資訊介紹 -->
+      </div>
     <div class="attraction-address-title">
       <h4>景點地址 : </h4>
-      <div class="attraction-address-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo, possimus quos. Saepe illum sed similique eum mollitia ea incidunt molestias labore aliquam odio aspernatur maiores enim, dicta velit. Tempora, laboriosam.</div>
+      <div class="attraction-address-content">
+        <!-- 景點地址 -->
+        </div>
     </div>
     <div class="attraction-transport-title">
       <h4>交通方式 : </h4>
-      <div class="attraction-transport-content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere error maxime nisi aliquid aliquam, eius, beatae placeat dignissimos quidem aut a! Odio molestias facilis autem voluptas explicabo. In, ut dolores.</div>
+      <div class="attraction-transport-content">
+        <!-- 景點交通方式 -->
+        </div>
     </div>
   </section>
 
   <footer>
     <p>COPYRIGHT &copy; 2021 台北一日遊</p>
  </footer>
+
+ <script src="{{ url_for('static', filename='/js/attraction.js') }}"></script>
 </body>
 </html>

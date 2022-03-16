@@ -60,7 +60,7 @@ main {
   display: flex;
   max-width: 1200px;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 35px auto;
   height: 400px;
 }
 
@@ -80,7 +80,7 @@ main {
   overflow: hidden;
 }
 
-.img-attraction > img {
+.img-container img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -165,7 +165,7 @@ main {
   column-gap: 10px;
 }
 
-input[type="radio"] {
+.radio-input {
   visibility: hidden;
 }
 
@@ -228,8 +228,7 @@ input[type="radio"] {
 }
 
 .line {
-  margin: 0 auto;
-  margin-top: 35px;
+  margin: 15px auto;
   max-width: 1200px;
   border: 1px solid #e8e8e8;
 }
@@ -239,7 +238,7 @@ input[type="radio"] {
   margin: 0 auto;
 }
 
-.attraction-xbody {
+.attraction-description {
   font-size: 1rem;
   font-weight: 400;
   color: #666666;

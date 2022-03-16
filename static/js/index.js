@@ -32,6 +32,10 @@ async function getData(){
     boxImg = document.createElement("div");
     boxImg.classList.add("box-img");
 
+    imgAnchor = document.createElement("a");
+    imgAnchor.classList.add("img-anchor")
+    imgAnchor.href = `attraction/${item["id"]}`
+
     img = document.createElement("img");
     img.src = item.images[0];
 
@@ -51,7 +55,8 @@ async function getData(){
     attCategory.textContent = item["category"];
 
     boxText.append(attName, attTransport, attCategory);
-    boxImg.appendChild(img);
+    imgAnchor.appendChild(img)
+    boxImg.appendChild(imgAnchor);
     gridBox.append(boxImg, boxText);
     secondSection.appendChild(gridBox);
     }
