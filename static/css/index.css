@@ -36,9 +36,9 @@ header .header-text {
   width: 150px;
 }
 
-header a {
+.header-text-a {
   font-size: 1.875rem;
-  font-weight: bold;
+  font-weight: 700;
   color: #448899;
 }
 
@@ -55,6 +55,7 @@ nav a {
   font-size: 1rem;
   text-decoration: none;
   color: #666666;
+  font-weight: 400;
 }
 
 main {
@@ -250,7 +251,7 @@ footer {
 
 @media screen and (max-width: 415px) {
   header .header-container {
-    font-size: 0.7rem;
+    padding: 5px 5px;
   }
 
   .first-section {
