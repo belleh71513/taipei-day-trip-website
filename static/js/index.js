@@ -111,7 +111,7 @@ const searchAttraction = (e) => {
   keyword = inputVal.value;
   if(secondSection.innerHTML && keyword){
     secondSection.innerHTML = ""
-    getData()
+    init()
     e.stopPropagation()
   }
 };
