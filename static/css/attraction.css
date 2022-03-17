@@ -370,7 +370,7 @@ footer {
   }
 
   .line {
-    margin-top: 60px;
+    margin-top: 30px;
   }
 }
 
@@ -380,6 +380,10 @@ footer {
   }
   header .header-container {
     padding: 5px 5px;
+  }
+
+  header .header-text {
+    width: 150px;
   }
 
   header .header-text a {
@@ -397,5 +401,33 @@ footer {
 
   .line {
     margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 376px), (max-height: 700px) {
+  main {
+    min-height: 60vh;
+  }
+
+  .booking-area > div {
+    margin: 5px 10px 15px 5px;
+  }
+
+  .line {
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 360px), (max-height: 800px) {
+  main {
+    min-height: 70vh;
+  }
+
+  .booking-area > div {
+    margin: 5px 10px 15px 5px;
+  }
+
+  .line {
+    margin-top: 95px;
   }
 }
