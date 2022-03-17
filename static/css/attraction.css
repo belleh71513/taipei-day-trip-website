@@ -368,6 +368,10 @@ footer {
   .attraction-info {
     width: 90%;
   }
+
+  .line {
+    margin-top: 60px;
+  }
 }
 
 @media screen and (max-width: 415px) {
@@ -392,6 +396,6 @@ footer {
   }
 
   .line {
-    margin-top: 130px;
+    margin-top: 80px;
   }
 }
