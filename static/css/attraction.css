@@ -17,7 +17,7 @@ header {
   top: 0;
   z-index: 1;
   background-color: #fff;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #e8e8e8;
 }
 
 header .header-container {
@@ -137,7 +137,12 @@ main {
   width: 80%;
 }
 
+.attraction-booking-menu {
+  margin-bottom: 10px;
+}
+
 .attraction-name {
+  margin-bottom: 5px;
   font-size: 1.5rem;
 }
 
@@ -150,7 +155,7 @@ main {
 }
 
 .booking-area > div {
-  margin: 20px 15px 25px 5px;
+  margin: 10px 15px 25px 5px;
 }
 
 .booking-main-type {
@@ -384,5 +389,9 @@ footer {
   .booking-info-introduce {
     width: 90%;
     margin: 0 auto;
+  }
+
+  .line {
+    margin-top: 130px;
   }
 }

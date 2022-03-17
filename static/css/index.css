@@ -20,7 +20,7 @@ header {
   background-color: #fff;
   height: 58px;
   z-index: 1;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #e8e8e8;
 }
 
 header .header-container {
@@ -71,7 +71,7 @@ main {
   background: url("../img/main_bgc_img.png"),
     linear-gradient(135deg, #aaddee 0%, #66aabb 100%);
   background-repeat: no-repeat;
-  background-position: top 60px right 20%;
+  background-position: top 60px right 20%, 100%;
   background-size: contain;
 }
 

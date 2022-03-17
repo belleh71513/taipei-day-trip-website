@@ -1,14 +1,15 @@
-
+// ********************取得元素*************************
 const secondSection = document.querySelector(".second-section");
 const footer = document.querySelector("footer");
 
-
+// ********************取得資料*************************
 // page從 0 開始搜尋
 let page = 0 ;
 // 未進行搜尋功能時，keyword 設為 null
 let keyword = null;
 let nextPage;
 // let url ;
+let data = null ;
 let fetching = false ;
 
 async function getData(){
@@ -20,7 +21,13 @@ async function getData(){
     url = `/api/attractions?page=${page}`;
   }
   const response = await fetch(url);
-  const data = await response.json();
+  const result = await response.json();
+  data = result
+  fetching = false ;
+}
+
+// ********************渲染畫面*************************
+function renderPage (){
   let attData = data.data;
   nextPage = data.nextPage;
   // 有資料就渲染頁面
@@ -67,8 +74,14 @@ async function getData(){
   }
   // 記錄下一頁的資料
   page = nextPage;
-  fetching = false ;
 }
+
+// ********************頁面初始化************************
+async function init(){
+  await getData();
+  renderPage();
+}
+init()
 
 const options = {
   rootMargin: "0px 0px 20px 0px",
@@ -78,22 +91,19 @@ const callback = (entries, observer) => {
   if(!fetching){
     entries.forEach(entry => {
       if(entry.intersectionRatio > 0 && page){
-        getData();
+        init();
       }
       else if(page === null){
         observer.unobserve(footer);
       }
     })
-  }else{
-    return
-  }
-
+  }else return
 }
 
 const observer = new IntersectionObserver(callback, options)
 observer.observe(footer)
 
-
+// ********************監聽事件*************************
 const searchAttraction = (e) => {
   e.preventDefault()
   // 從 page 0 開始搜尋
@@ -109,16 +119,16 @@ const searchAttraction = (e) => {
 const searchAttractionKeypress = (e) => {
   if (e.keyCode == 13) {
     searchAttraction(e)
-  }else{return}
+  }
 }
 
-getData();
 
 const inputVal = document.querySelector("#input-val");
 const inputBtn = document.querySelector("#input-btn");
 
-
+// 點擊查詢按鈕
 inputBtn.addEventListener("click", searchAttraction);
+// 按 enter 查詢
 inputVal.addEventListener("keydown", searchAttractionKeypress);
 
 
