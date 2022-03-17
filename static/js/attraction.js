@@ -42,9 +42,9 @@ function renderPage(){
     imgContainer.appendChild(img)
     slideIconWrap.appendChild(slideIcon)
   });
-  // 景點各相關資訊載入
+  // 景點各相關資訊載入(嘗試利用三元運算)
   attractionName.textContent = attData["name"]
-  attractionCategoryMrt.textContent = `${attData["name"]} at ${attData["mrt"]}`
+  attractionCategoryMrt.textContent = attData["mrt"] ? `${attData["name"]} at ${attData["mrt"]}` : `${attData["name"]}`
   attracionDescription.textContent = attData["description"]
   attractionAddressContent.textContent = attData["address"]
   attractionTransportContent.textContent = attData["transport"]

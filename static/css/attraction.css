@@ -144,13 +144,13 @@ main {
 .booking-area {
   background: #e8e8e8;
   width: 100%;
-  height: 80%;
+  height: auto;
   border-radius: 5px;
-  padding: 15px;
+  padding: 5px;
 }
 
 .booking-area > div {
-  margin: 20px 15px 25px 15px;
+  margin: 20px 15px 25px 5px;
 }
 
 .booking-main-type {
@@ -230,7 +230,7 @@ main {
 
 .booking-btn {
   display: block;
-  margin: 15px 0 10px 15px;
+  margin: 15px 0 10px 5px;
   padding: 10px;
   background: #448899;
   color: #fff;
