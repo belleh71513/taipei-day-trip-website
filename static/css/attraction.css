@@ -1,0 +1,433 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+header {
+  width: 100%;
+  height: 58px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #fff;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+header .header-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .header-text {
+  width: 20vw;
+}
+
+header a {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #448899;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  padding: 10px 10px;
+}
+
+nav a {
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: #666666;
+}
+
+main {
+  display: flex;
+  max-width: 1200px;
+  justify-content: space-between;
+  margin: 35px auto;
+  height: 400px;
+}
+
+.img-area {
+  display: flex;
+  flex: 1;
+  position: relative;
+  justify-content: center;
+}
+
+.img-attraction {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.img-container {
+  display: flex;
+}
+
+.img-container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 16/9;
+}
+
+.img-container .hidden {
+  display: none;
+}
+
+.arrow-container {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  padding: 0 10px;
+  justify-content: space-between;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.arrow-pre,
+.arrow-next {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.slide-icon-wrap {
+  position: absolute;
+  bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.slide-icon-wrap .slide-icon {
+  background: rgba(255, 255, 255, 0.5);
+  width: 15px;
+  height: 15px;
+  margin: 5px;
+  border-radius: 50%;
+}
+
+.slide-icon-wrap .hidden {
+  background: #000;
+  transform: scale(0.9);
+}
+
+.booking-info-introduce {
+  flex: 1;
+  margin-left: 30px;
+  width: 80%;
+}
+
+.attraction-booking-menu {
+  margin-bottom: 10px;
+}
+
+.attraction-name {
+  margin-bottom: 5px;
+  font-size: 1.5rem;
+}
+
+.booking-area {
+  background: #e8e8e8;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.booking-area > div {
+  margin: 10px 15px 25px 5px;
+}
+
+.booking-main-type {
+  font-size: 1rem;
+  color: #666666;
+  font-weight: 700;
+}
+
+.booking-secondary-type {
+  font-size: 1rem;
+  color: #666666;
+  font-weight: 400;
+}
+
+.attraction-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #666666;
+}
+
+.booking-area-time {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.radio-input {
+  visibility: hidden;
+}
+
+.radio-label {
+  cursor: pointer;
+  position: relative;
+}
+
+.radio-btn {
+  height: 20px;
+  width: 20px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  left: -25px;
+  top: 5px;
+  background: #fff;
+}
+
+.radio-btn::after {
+  /* 中間點點 */
+  content: "";
+  display: block;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #448899;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.radio-input:checked + .radio-label .radio-btn::after {
+  /* 選中radio時 才顯示中間點點 */
+  opacity: 1;
+}
+
+.booking-cost {
+  display: flex;
+  column-gap: 10px;
+}
+
+.booking-price {
+  color: #666666;
+}
+
+.booking-btn {
+  display: block;
+  margin: 15px 0 10px 5px;
+  padding: 10px;
+  background: #448899;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.line {
+  margin: 15px auto;
+  max-width: 1200px;
+  border: 1px solid #e8e8e8;
+}
+
+.attraction-info {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.attraction-description {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666666;
+  padding: 20px 0;
+}
+.attraction-address-title h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #666666;
+  padding: 15px 0 5px 0;
+}
+
+.attraction-address-content {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666666;
+}
+
+.attraction-transport-title h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #666666;
+  padding: 15px 0 5px 0;
+}
+
+.attraction-transport-content {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666666;
+}
+
+footer {
+  display: flex;
+  margin-top: 30px;
+  background: #757575;
+  width: 100%;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 1200px) {
+  main {
+    width: 95%;
+  }
+
+  header .header-container {
+    padding: 10px 10px;
+  }
+
+  header .header-text {
+    width: 30vw;
+  }
+  .slide-icon-wrap .slide-icon {
+    width: 10px;
+    height: 10px;
+    margin: 3px;
+  }
+
+  .slide-icon-wrap .hidden {
+    background: #000;
+    transform: scale(0.9);
+  }
+
+  .attraction-info {
+    width: 95%;
+  }
+
+  .booking-area {
+    padding: 0 0 5px 0;
+  }
+
+  .line {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header .header-text {
+    width: 50vw;
+  }
+
+  main {
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    height: 80vh;
+    margin: 0 auto;
+  }
+
+  .img-area {
+    flex: 0.8;
+  }
+
+  .img-container {
+    width: 100%;
+  }
+
+  .booking-info-introduce {
+    margin: 0 auto;
+  }
+
+  .attraction-booking-menu {
+    margin: 0;
+  }
+
+  .attraction-info {
+    width: 90%;
+  }
+
+  .line {
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  main {
+    height: 65vh;
+  }
+  header .header-container {
+    padding: 5px 5px;
+  }
+
+  header .header-text {
+    width: 150px;
+  }
+
+  header .header-text a {
+    font-size: 1.875rem;
+  }
+
+  nav a {
+    font-size: 1rem;
+  }
+
+  .booking-info-introduce {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .line {
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 376px), (max-height: 700px) {
+  main {
+    min-height: 60vh;
+  }
+
+  .booking-area > div {
+    margin: 5px 10px 15px 5px;
+  }
+
+  .line {
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 360px), (max-height: 800px) {
+  main {
+    min-height: 70vh;
+  }
+
+  .booking-area > div {
+    margin: 5px 10px 15px 5px;
+  }
+
+  .line {
+    margin-top: 95px;
+  }
+}
