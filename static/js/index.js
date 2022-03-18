@@ -44,7 +44,9 @@ function renderPage (){
     imgAnchor.href = `attraction/${item["id"]}`
 
     img = document.createElement("img");
-    img.src = item.images[0];
+    img.classList.add("origin-img")
+    // img.src = item.images[0];
+    img.dataset.src = item.images[0];
 
     boxText = document.createElement("div");
     boxText.classList.add("box-text");
@@ -80,18 +82,27 @@ function renderPage (){
 async function init(){
   await getData();
   renderPage();
+  dataSrc();
 }
 init()
+
+
+function dataSrc(){
+  const originImg = document.querySelectorAll(".origin-img")
+  originImg.forEach(img => {
+    img.src = img.dataset.src
+  })
+}
 
 const options = {
   rootMargin: "0px 0px 20px 0px",
   threshold:0
 };
 const callback = (entries, observer) => {
-  if(!fetching){
+  if(!fetching){    
     entries.forEach(entry => {
-      if(entry.intersectionRatio > 0 && page){
-        init();
+      if(entry.intersectionRatio > 0 && page){        
+        init();              
       }
       else if(page === null){
         observer.unobserve(footer);
@@ -111,7 +122,7 @@ const searchAttraction = (e) => {
   keyword = inputVal.value;
   if(secondSection.innerHTML && keyword){
     secondSection.innerHTML = ""
-    getData()
+    init()
     e.stopPropagation()
   }
 };
@@ -130,6 +141,30 @@ const inputBtn = document.querySelector("#input-btn");
 inputBtn.addEventListener("click", searchAttraction);
 // 按 enter 查詢
 inputVal.addEventListener("keydown", searchAttractionKeypress);
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+//   if ("IntersectionObserver" in window) {
+//     let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+//       entries.forEach(function(entry) {
+//         if (entry.isIntersecting) {
+//           let lazyImage = entry.target;
+//           lazyImage.src = lazyImage.dataset.src;
+//           lazyImage.srcset = lazyImage.dataset.srcset;
+//           lazyImage.classList.remove("lazy");
+//           lazyImageObserver.unobserve(lazyImage);
+//         }
+//       });
+//     });
+
+//     lazyImages.forEach(function(lazyImage) {
+//       lazyImageObserver.observe(lazyImage);
+//     });
+//   } else {
+//     // Possibly fall back to event handlers here
+//   }
+// });
 
 
 

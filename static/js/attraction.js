@@ -3,7 +3,7 @@
 const imgContainer = document.querySelector(".img-container")
 const attractionName = document.querySelector(".attraction-name")
 const attractionCategoryMrt = document.querySelector(".attraction-category-mrt")
-const attracionDescription = document.querySelector(".attraction-description")
+const attractionDescription = document.querySelector(".attraction-description")
 const attractionAddressContent = document.querySelector(".attraction-address-content")
 const attractionTransportContent = document.querySelector(".attraction-transport-content")
 const slideIconWrap = document.querySelector(".slide-icon-wrap")
@@ -37,7 +37,7 @@ function renderPage(){
     }
     // radio 第一個給予 hidden class 表示第一張圖片
     if(index === 0){
-      slideIcon.classList.add("hidden")
+      slideIcon.classList.add("active")
     }
     imgContainer.appendChild(img)
     slideIconWrap.appendChild(slideIcon)
@@ -45,7 +45,7 @@ function renderPage(){
   // 景點各相關資訊載入(嘗試利用三元運算)
   attractionName.textContent = attData["name"]
   attractionCategoryMrt.textContent = attData["mrt"] ? `${attData["name"]} at ${attData["mrt"]}` : `${attData["name"]}`
-  attracionDescription.textContent = attData["description"]
+  attractionDescription.textContent = attData["description"]
   attractionAddressContent.textContent = attData["address"]
   attractionTransportContent.textContent = attData["transport"]
 }
@@ -87,7 +87,7 @@ arrowNext.addEventListener("click", ()=>{
     img.classList.add("hidden")
   })
   slideIcon.forEach((icon) =>{
-    icon.classList.remove("hidden")
+    icon.classList.remove("active")
   })
   // 如果到了最後一張圖片就歸 0
   if(count > (slideImg.length-1)){
@@ -95,7 +95,7 @@ arrowNext.addEventListener("click", ()=>{
   }
   // 當前圖片移除 hidden 元素(將圖片顯示出來)
   slideImg[count].classList.remove("hidden");
-  slideIcon[count].classList.add("hidden");
+  slideIcon[count].classList.add("active");
 })
 // pre 按鈕綁定函式
 arrowPre.addEventListener("click", ()=>{
@@ -106,18 +106,36 @@ arrowPre.addEventListener("click", ()=>{
     img.classList.add("hidden")
   })
   slideIcon.forEach((icon) =>{
-    icon.classList.remove("hidden")
+    icon.classList.remove("active")
   })
   if(count < 0 ){
     count = slideImg.length-1;
   }
   slideImg[count].classList.remove("hidden");
-  slideIcon[count].classList.add("hidden");
+  slideIcon[count].classList.add("active");
 })
 
 // *************景點圖片自動輪播(待開發)*****************
 
-
+const autoPlat = setInterval(function(){
+  const slideImg = document.querySelectorAll(".slide-img")
+  const slideIcon = document.querySelectorAll(".slide-icon");
+  count ++;
+  // 給所有圖片 hidden class
+  slideImg.forEach((img) =>{
+    img.classList.add("hidden")
+  })
+  slideIcon.forEach((icon) =>{
+    icon.classList.remove("active")
+  })
+  // 如果到了最後一張圖片就歸 0
+  if(count > (slideImg.length-1)){
+    count = 0;
+  }
+  // 當前圖片移除 hidden 元素(將圖片顯示出來)
+  slideImg[count].classList.remove("hidden");
+  slideIcon[count].classList.add("active");
+}, 5000)
 
 
 
