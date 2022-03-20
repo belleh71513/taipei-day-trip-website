@@ -75,13 +75,14 @@ amRadio.addEventListener("click", ()=>{
 // 取得按鈕元素
 const arrowPre = document.querySelector(".arrow-pre");
 const arrowNext = document.querySelector(".arrow-next");
+
 // 全域變數紀錄目前圖片位置
 let count = 0;
-// next 按鈕綁定函式
-arrowNext.addEventListener("click", ()=>{
-  const slideImg = document.querySelectorAll(".slide-img")
-  const slideIcon = document.querySelectorAll(".slide-icon");
-  count ++;
+
+let slideShow = (slideImg, slideIcon) => {
+
+  // if(e.currentTarget === arrowNext) count++ ;
+  // else count-- ;
   // 給所有圖片 hidden class
   slideImg.forEach((img) =>{
     img.classList.add("hidden")
@@ -89,38 +90,43 @@ arrowNext.addEventListener("click", ()=>{
   slideIcon.forEach((icon) =>{
     icon.classList.remove("active")
   })
-  // 如果到了最後一張圖片就歸 0
   if(count > (slideImg.length-1)){
     count = 0;
-  }
-  // 當前圖片移除 hidden 元素(將圖片顯示出來)
-  slideImg[count].classList.remove("hidden");
-  slideIcon[count].classList.add("active");
-})
-// pre 按鈕綁定函式
-arrowPre.addEventListener("click", ()=>{
-  const slideImg = document.querySelectorAll(".slide-img")
-  const slideIcon = document.querySelectorAll(".slide-icon");
-  count --;
-  slideImg.forEach((img) =>{
-    img.classList.add("hidden")
-  })
-  slideIcon.forEach((icon) =>{
-    icon.classList.remove("active")
-  })
-  if(count < 0 ){
+  }else if(count < 0 ){
     count = slideImg.length-1;
   }
+  // 當前圖片移除 hidden 元素(將圖片顯示出來)
   slideImg[count].classList.remove("hidden");
   slideIcon[count].classList.add("active");
-})
+}
 
-// *************景點圖片自動輪播(待開發)*****************
+// ****************景點圖片自動輪播*********************
+let autoPlay = setInterval(() => {
+    const slideImg = document.querySelectorAll(".slide-img");
+    const slideIcon = document.querySelectorAll(".slide-icon");
+    count++;
+    // 給所有圖片 hidden class
+    slideImg.forEach((img) =>{
+      img.classList.add("hidden")
+    })
+    slideIcon.forEach((icon) =>{
+      icon.classList.remove("active")
+    })
+    if(count > (slideImg.length-1)){
+      count = 0;
+    }else if(count < 0 ){
+      count = slideImg.length-1;
+    }
+    // 當前圖片移除 hidden 元素(將圖片顯示出來)
+    slideImg[count].classList.remove("hidden");
+    slideIcon[count].classList.add("active");
+}, 5000)
 
-const autoPlat = setInterval(function(){
-  const slideImg = document.querySelectorAll(".slide-img")
+const start = () => {
+  autoPlay = setInterval(() => {
+  const slideImg = document.querySelectorAll(".slide-img");
   const slideIcon = document.querySelectorAll(".slide-icon");
-  count ++;
+  count++;
   // 給所有圖片 hidden class
   slideImg.forEach((img) =>{
     img.classList.add("hidden")
@@ -128,14 +134,31 @@ const autoPlat = setInterval(function(){
   slideIcon.forEach((icon) =>{
     icon.classList.remove("active")
   })
-  // 如果到了最後一張圖片就歸 0
   if(count > (slideImg.length-1)){
     count = 0;
+  }else if(count < 0 ){
+    count = slideImg.length-1;
   }
   // 當前圖片移除 hidden 元素(將圖片顯示出來)
   slideImg[count].classList.remove("hidden");
   slideIcon[count].classList.add("active");
-}, 5000)
+}, 5000)}
 
-
-
+// next 按鈕綁定函式
+arrowNext.addEventListener("click", () => {
+  const slideImg = document.querySelectorAll(".slide-img");
+  const slideIcon = document.querySelectorAll(".slide-icon");
+  count++ ;
+  clearInterval(autoPlay)
+  slideShow(slideImg, slideIcon)
+  start();
+})
+// pre 按鈕綁定函式
+arrowPre.addEventListener("click", () => {
+  const slideImg = document.querySelectorAll(".slide-img");
+  const slideIcon = document.querySelectorAll(".slide-icon");
+  count-- ;
+  clearInterval(autoPlay)
+  slideShow(slideImg, slideIcon)
+  start();
+})

@@ -99,10 +99,10 @@ const options = {
   threshold:0
 };
 const callback = (entries, observer) => {
-  if(!fetching){    
+  if(!fetching){
     entries.forEach(entry => {
-      if(entry.intersectionRatio > 0 && page){        
-        init();              
+      if(entry.intersectionRatio > 0 && page){
+        init();
       }
       else if(page === null){
         observer.unobserve(footer);
@@ -117,6 +117,8 @@ observer.observe(footer)
 // ********************監聽事件*************************
 const searchAttraction = (e) => {
   e.preventDefault()
+  // 按下搜尋時，再將觀察點設定一次
+  observer.observe(footer)
   // 從 page 0 開始搜尋
   page = 0;
   keyword = inputVal.value;
