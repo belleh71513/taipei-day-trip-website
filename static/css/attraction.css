@@ -88,6 +88,13 @@ main {
   height: 100%;
   object-fit: cover;
   aspect-ratio: 16/9;
+  animation:slide 1s ease
+}
+
+@keyframes slide {
+  0%{transform: scale(2);opacity: 0;}
+  100%{transform: scale(1);opacity: 1;}
+  
 }
 
 .img-container .hidden {
@@ -108,7 +115,13 @@ main {
 .arrow-pre,
 .arrow-next {
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.5;
+  transition: opacity, 1s, .5s;
+}
+
+.arrow-pre:hover,
+.arrow-next:hover{
+  opacity: 1;
 }
 
 .slide-icon-wrap {
@@ -126,7 +139,7 @@ main {
   border-radius: 50%;
 }
 
-.slide-icon-wrap .hidden {
+.slide-icon-wrap .active {
   background: #000;
   transform: scale(0.9);
 }
