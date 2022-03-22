@@ -80,9 +80,6 @@ const arrowNext = document.querySelector(".arrow-next");
 let count = 0;
 
 let slideShow = (slideImg, slideIcon) => {
-
-  // if(e.currentTarget === arrowNext) count++ ;
-  // else count-- ;
   // 給所有圖片 hidden class
   slideImg.forEach((img) =>{
     img.classList.add("hidden")
@@ -104,6 +101,7 @@ let slideShow = (slideImg, slideIcon) => {
 let autoPlay = setInterval(() => {
     const slideImg = document.querySelectorAll(".slide-img");
     const slideIcon = document.querySelectorAll(".slide-icon");
+
     count++;
     // 給所有圖片 hidden class
     slideImg.forEach((img) =>{

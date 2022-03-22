@@ -1,6 +1,16 @@
 // ********************取得元素*************************
 const secondSection = document.querySelector(".second-section");
 const footer = document.querySelector("footer");
+const loginRegister = document.querySelector("#login-register");
+const login = document.querySelector("#login")
+const register = document.querySelector("#register")
+const loginClose = document.querySelector(".login-close");
+const registerClose = document.querySelector(".register-close");
+const loginToggleBtn = document.querySelector(".login-toggle-btn");
+const registerToggleBtn = document.querySelector(".register-toggle-btn");
+
+
+
 
 // ********************取得資料*************************
 // page從 0 開始搜尋
@@ -135,6 +145,20 @@ const searchAttractionKeypress = (e) => {
   }
 }
 
+const loginDisplay = (e) => {
+  e.preventDefault();
+  login.classList.toggle("show")
+}
+
+const registerDisplay = () => {
+  register.classList.toggle("show")
+}
+
+const loginRegisterSwitch = () => {
+  login.classList.toggle("show")
+  register.classList.toggle("show")
+}
+
 
 const inputVal = document.querySelector("#input-val");
 const inputBtn = document.querySelector("#input-btn");
@@ -144,29 +168,12 @@ inputBtn.addEventListener("click", searchAttraction);
 // 按 enter 查詢
 inputVal.addEventListener("keydown", searchAttractionKeypress);
 
-// document.addEventListener("DOMContentLoaded", function() {
-//   var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
 
-//   if ("IntersectionObserver" in window) {
-//     let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-//       entries.forEach(function(entry) {
-//         if (entry.isIntersecting) {
-//           let lazyImage = entry.target;
-//           lazyImage.src = lazyImage.dataset.src;
-//           lazyImage.srcset = lazyImage.dataset.srcset;
-//           lazyImage.classList.remove("lazy");
-//           lazyImageObserver.unobserve(lazyImage);
-//         }
-//       });
-//     });
-
-//     lazyImages.forEach(function(lazyImage) {
-//       lazyImageObserver.observe(lazyImage);
-//     });
-//   } else {
-//     // Possibly fall back to event handlers here
-//   }
-// });
+loginRegister.addEventListener("click", loginDisplay)
+loginClose.addEventListener("click", loginDisplay)
+registerClose.addEventListener("click", registerDisplay)
+loginToggleBtn.addEventListener("click",loginRegisterSwitch)
+registerToggleBtn.addEventListener("click",loginRegisterSwitch)
 
 
 

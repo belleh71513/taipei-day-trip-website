@@ -1,4 +1,5 @@
 from distutils.command.config import config
+from flask import jsonify
 import mysql.connector
 from mysql.connector import pooling
 from dotenv import load_dotenv
@@ -44,7 +45,7 @@ def select_attractions(**kwargs):
       data = get_per_col(results)
       return data
   except :
-    print("error1")
+    print("select_attractions error")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -93,9 +94,30 @@ def select_att_id(att_id):
     sql = f"SELECT * FROM attraction_table WHERE id={att_id}"
     cursor.execute(sql)
     result = cursor.fetchone()
-    return result
+    if result :
+      res = {
+          "data":{
+          "id": result["id"],
+          "name": result["name"],
+          "category": result["category"],
+          "description": result["description"],
+          "address": result["address"],
+          "transport": result["transport"],
+          "mrt": result["mrt"],
+          "latitude": result["latitude"],
+          "longitude": result["longitude"],
+          "images": json.loads(result["images"])
+        }
+      }
+      return res
+    else:
+      res = {
+        "error": True,
+        "message": "景點編號不正確"
+      }
+      return res
   except :
-    print("error2")
+    print("select_att_id fucntion error")
   finally:
     if con.in_transaction:
       con.rollback()
