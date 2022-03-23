@@ -1,4 +1,3 @@
-from distutils.command.config import config
 from flask import jsonify
 import mysql.connector
 from mysql.connector import pooling
