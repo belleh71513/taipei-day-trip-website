@@ -58,6 +58,23 @@ nav a {
   font-weight: 400;
 }
 
+.logout-a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #666666;
+  font-weight: 400;
+  display: none;
+}
+
+.nav-a-show {
+  display: block;
+}
+
+.nav-a-hidden {
+  display: none;
+  padding: 0;
+}
+
 /* =========================登入區塊========================= */
 .login {
   display: none;
@@ -243,6 +260,10 @@ nav a {
 
 .show {
   display: block;
+}
+
+.hidden {
+  display: none;
 }
 /* =========================main區塊========================= */
 main {

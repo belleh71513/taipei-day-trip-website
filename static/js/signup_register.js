@@ -1,6 +1,7 @@
 // *********************登入 / 註冊 彈出視窗監聽事件*****************************
 
-const loginRegister = document.querySelector("#login-register");
+const loginLi = document.querySelector(".logout-li");
+const logoutA = document.querySelector(".logout-a");
 const loginSection = document.querySelector("#loginSection")
 const registerSection = document.querySelector("#registerSection")
 const loginClose = document.querySelector(".login-close");
@@ -9,28 +10,43 @@ const loginToggleBtn = document.querySelector(".login-toggle-btn");
 const registerToggleBtn = document.querySelector(".register-toggle-btn");
 const registerMessage = document.querySelector("#registerMessage");
 const loginMessage = document.querySelector("#loginMessage");
+// *********************註冊表單元素*****************************
+const registerName = document.querySelector("#registerName")
+const registerEmail = document.querySelector("#registerEmail")
+const registerPassword = document.querySelector("#registerPassword")
+// *********************登入表單元素*****************************
+const loginEmail = document.querySelector("#loginEmail")
+const loginPassword = document.querySelector("#loginPassword")
 
 const loginDisplay = (e) => {
   e.preventDefault()
+  loginMessage.textContent = "";
+  loginEmail.value = "";
+  loginPassword.value = "";
   loginSection.classList.toggle("show")
 }
 
 const registerDisplay = () => {
+  registerMessage.textContent = "";
   registerSection.classList.toggle("show")
+  registerName.value = "";
+  registerEmail.value= "";
+  registerPassword.value= "";
 }
 
 const loginRegisterSwitch = () => {
+  loginMessage.textContent = "";
+  registerMessage.textContent = "";
+  registerName.value = "";
+  registerEmail.value= "";
+  registerPassword.value= "";
+  loginEmail.value = "";
+  loginPassword.value = "";
   loginSection.classList.toggle("show")
   registerSection.classList.toggle("show")
-  if(loginMessage.textContent){
-    loginMessage.textContent="";
-  }
-  if(registerMessage.textContent){
-    registerMessage.textContent="";
-  }
 }
 
-loginRegister.addEventListener("click", loginDisplay)
+loginLi.addEventListener("click", loginDisplay)
 loginClose.addEventListener("click", loginDisplay)
 registerClose.addEventListener("click", registerDisplay)
 loginToggleBtn.addEventListener("click",loginRegisterSwitch)
@@ -47,8 +63,11 @@ function checkUserStatus(){
   })
   .then(data => {
     if(data.data){
-      loginRegister.textContent = "登出系統"
-   }
+      loginLi.classList.add("nav-a-hidden")
+      logoutA.classList.add("nav-a-show")
+    }else{
+      logoutA.classList.add("nav-a-hidden")
+    }
   })
 }
 checkUserStatus();
@@ -57,12 +76,11 @@ const registerBtn = document.querySelector(".register-btn")
 
 function register(e){
   e.preventDefault()
-  const registerName = document.querySelector("#registerName").value
-  const registerEmail = document.querySelector("#registerEmail").value
-  const registerPassword = document.querySelector("#registerPassword").value
+  const name = registerName.value
+  const email = registerEmail.value
+  const password = registerPassword.value
 
-
-  if (!registerName ||  !registerEmail || !registerPassword){
+  if (!name ||  !email || !password){
     registerMessage.textContent = "姓名、電子信箱或密碼欄位不得為空";
   }else{
     fetch("/api/user",{
@@ -71,9 +89,9 @@ function register(e){
         "Content-Type" : "application/json"
       },
       body : JSON.stringify({
-        "name" : registerName,
-        "email" : registerEmail,
-        "password" : registerPassword
+        "name" : name,
+        "email" : email,
+        "password" : password
       })
     })
     .then(response => {
@@ -97,10 +115,10 @@ registerBtn.addEventListener("click", register)
 const loginBtn = document.querySelector(".login-btn")
 function login(e){
   e.preventDefault()
-  const loginEmail = document.querySelector("#loginEmail").value
-  const loginPassword = document.querySelector("#loginPassword").value
+  const email = loginEmail.value
+  const password = loginPassword.value
 
-  if (!loginEmail ||  !loginPassword){
+  if (!email ||  !password){
     loginMessage.textContent = "電子信箱或密碼欄位不得為空";
   }else{
     fetch("api/user", {
@@ -109,17 +127,20 @@ function login(e){
         "Content-Type" : "application/json"
       },
       body : JSON.stringify({
-        "email" : loginEmail,
-        "password" : loginPassword
+        "email" : email,
+        "password" : password
       })
     })
     .then(response => {
       return response.json();
     })
     .then(data => {
-      console.log(data)
       if(data.ok){
-        loginSection.classList.toggle("show")
+        loginMessage.textContent = "登入成功";
+        loginMessage.style.color = "black"
+        setTimeout(() =>{
+          window.location.reload()
+        },1500)
       }else{
         loginMessage.textContent = data.message;
       }
@@ -136,6 +157,17 @@ function logout(){
     return response.json();
   })
   .then(data => {
-
+    if(data.ok){
+      logoutA.classList.add("nav-a-hidden")
+      loginLi.classList.remove("nav-a-hidden")
+    }
   })
 }
+logoutA.addEventListener("click", (e) => {
+  e.preventDefault();
+  logout();
+  // setTimeout(()=>{
+  //   window.location.reload()
+  // },1000)
+  }
+)

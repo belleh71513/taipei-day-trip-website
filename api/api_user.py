@@ -1,16 +1,14 @@
 from flask import *
 from dotenv import load_dotenv
 from model.user import *
-import os
 
 load_dotenv()
 
 user = Blueprint("user", __name__)
-app.secret_key = os.urandom(24)
 
 @user.route("/user", methods=["GET"])
 def api_user_check():
-  email = session.get("eamil")
+  email = session.get("email")
   if email:
     user_data = user_check_status(email)
     if user_data:
@@ -60,10 +58,10 @@ def api_user_login():
     password = login_data["password"]
     login_status = user_login(email, password)
     if login_status:
-      # session["id"] = login_status[0]
-      # session["name"] = login_status[1]
-      # session["email"] = login_status[2]
-      # session["password"] = login_status[3]
+      session["id"] = login_status[0]
+      session["name"] = login_status[1]
+      session["email"] = login_status[2]
+      session["password"] = login_status[3]
       res = {"ok" : True}
       return jsonify(res), 200
     else:

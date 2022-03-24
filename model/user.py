@@ -21,8 +21,8 @@ pool = mysql.connector.pooling.MySQLConnectionPool(
 def user_check_status(email):
   try:
     con = pool.get_connection()
-    cursor = con.cursor
-    sql = "SELECT (id, name, email) FROM user_table WHERE email=%s"
+    cursor = con.cursor()
+    sql = "SELECT id, name, email FROM user_table WHERE email=%s"
     cursor.execute(sql, (email,))
     result = cursor.fetchone()
     if result :
