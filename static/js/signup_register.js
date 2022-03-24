@@ -53,9 +53,10 @@ loginToggleBtn.addEventListener("click",loginRegisterSwitch)
 registerToggleBtn.addEventListener("click",loginRegisterSwitch)
 
 // ********************登入狀態確認****************************
-
+let apiURL = `${window.location.origin}/api/user`
+console.log(apiURL)
 function checkUserStatus(){
-  fetch("/api/user",{
+  fetch(apiURL,{
     method : "GET"
   })
   .then(response => {
@@ -83,7 +84,7 @@ function register(e){
   if (!name ||  !email || !password){
     registerMessage.textContent = "姓名、電子信箱或密碼欄位不得為空";
   }else{
-    fetch("/api/user",{
+    fetch(apiURL,{
       method : "POST",
       headers: {
         "Content-Type" : "application/json"
@@ -121,7 +122,7 @@ function login(e){
   if (!email ||  !password){
     loginMessage.textContent = "電子信箱或密碼欄位不得為空";
   }else{
-    fetch("api/user", {
+    fetch(apiURL, {
       method : "PATCH",
       headers: {
         "Content-Type" : "application/json"
@@ -150,7 +151,7 @@ function login(e){
 loginBtn.addEventListener("click", login)
 // *********************登出功能*****************************
 function logout(){
-  fetch("/api/user",{
+  fetch(apiURL,{
     method : "DELETE"
   })
   .then(response => {

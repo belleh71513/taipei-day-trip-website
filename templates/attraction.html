@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='/css/attraction.css') }}"
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/attraction.css') }}">
 </head>
 <body>
   <header>
@@ -17,13 +17,14 @@
       <nav>
         <ul>
           <li><a href="/">預定行程</a></li>
-          <li><a id="login-register" href="/">登入/註冊</a></li>
+          <li class="logout-li"><a id="login-register" href="/">登入/註冊</a></li>
+          <li class="logout-a"><a class="logout" href="/">登出系統</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <section id="login" class="login">
+  <section id="loginSection" class="login">
     <div class="login-container">
       <div class="login-top"></div>
       <img class="login-close"
@@ -31,17 +32,17 @@
       alt="close">
       <h3 class="login-title">登入會員帳號</h3>
       <form class="login-form" action="">
-        <input type="email" class="login-input"
-        id="account" placeholder="輸入電子信箱" required>
-        <input type="password" class="login-input" id="password" placeholder="輸入密碼" required>
+        <input type="email" id="loginEmail" class="login-input"
+        id="account" placeholder="輸入電子信箱" name="loginAcc" required>
+        <input type="password" id="loginPassword" class="login-input" id="password" placeholder="輸入密碼" name="loginPassword" required>
         <button type="submit" class="login-btn">登入帳戶</button>
       </form>
-      <p></p>
+      <p id="loginMessage"></p>
       <div class="toggle-btn login-toggle-btn">還沒有帳戶嗎 ? 點此註冊</div>
     </div>
   </section>
 
-  <section id="register" class="register">
+  <section id="registerSection" class="register">
     <div class="register-container">
       <div class="register-top"></div>
       <img
@@ -49,11 +50,11 @@
       alt="close" class="register-close">
       <h3 class="register-title">註冊會員帳號</h3>
       <form class="register-form" action="">
-        <input type="text" class="register-input" placeholder="輸入姓名" required>
-        <input type="email" class="register-input" placeholder="輸入電子信箱" required>
-        <input type="password" class="register-input" placeholder="輸入密碼" required>
+        <input type="text" id="registerName"class="register-input" placeholder="輸入姓名" name="registerName" required>
+        <input type="email" id="registerEmail" class="register-input" placeholder="輸入電子信箱" name="registerEmail" required>
+        <input type="password" id="registerPassword" class="register-input" placeholder="輸入密碼" name="registerPassword" required>
         <button type="submit" class="register-btn">註冊新帳號</button>
-        <p></p>
+        <p id="registerMessage"></p>
       </form>
       <div class="toggle-btn register-toggle-btn">已經有帳戶了 ? 點此登入</div>
     </div>
