@@ -1,7 +1,7 @@
 from urllib import request
 from flask import *
 import json
-from modules.get_mysql_data import select_attractions, select_att_id
+from model.attraction import select_attractions, select_att_id
 
 attractions = Blueprint("attractions", __name__)
 
@@ -46,30 +46,9 @@ def api_attractions():
 @attractions.route("/attraction/<int:attractionID>")
 def api_attraction_attractionID(attractionID):
   try:
-    get_att_id = select_att_id(attractionID)
+    res = select_att_id(attractionID)
     # SQL中有該id
-    if get_att_id:
-      res = {
-          "data":{
-          "id": get_att_id["id"],
-          "name": get_att_id["name"],
-          "category": get_att_id["category"],
-          "description": get_att_id["description"],
-          "address": get_att_id["address"],
-          "transport": get_att_id["transport"],
-          "mrt": get_att_id["mrt"],
-          "latitude": get_att_id["latitude"],
-          "longitude": get_att_id["longitude"],
-          "images": json.loads(get_att_id["images"])
-        }
-      }
-      return jsonify(res)
-    else:
-      res = {
-        "error": True,
-        "message": "景點編號不正確"
-      }
-      return jsonify(res), 400
+    return jsonify(res)
   except:
     res = {
       "error": True,

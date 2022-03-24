@@ -44,7 +44,9 @@ function renderPage (){
     imgAnchor.href = `attraction/${item["id"]}`
 
     img = document.createElement("img");
-    img.src = item.images[0];
+    img.classList.add("origin-img")
+    // img.src = item.images[0];
+    img.dataset.src = item.images[0];
 
     boxText = document.createElement("div");
     boxText.classList.add("box-text");
@@ -80,8 +82,17 @@ function renderPage (){
 async function init(){
   await getData();
   renderPage();
+  dataSrc();
 }
 init()
+
+
+function dataSrc(){
+  const originImg = document.querySelectorAll(".origin-img")
+  originImg.forEach(img => {
+    img.src = img.dataset.src
+  })
+}
 
 const options = {
   rootMargin: "0px 0px 20px 0px",
@@ -106,12 +117,14 @@ observer.observe(footer)
 // ********************監聽事件*************************
 const searchAttraction = (e) => {
   e.preventDefault()
+  // 按下搜尋時，再將觀察點設定一次
+  observer.observe(footer)
   // 從 page 0 開始搜尋
   page = 0;
   keyword = inputVal.value;
   if(secondSection.innerHTML && keyword){
     secondSection.innerHTML = ""
-    getData()
+    init()
     e.stopPropagation()
   }
 };
@@ -122,7 +135,6 @@ const searchAttractionKeypress = (e) => {
   }
 }
 
-
 const inputVal = document.querySelector("#input-val");
 const inputBtn = document.querySelector("#input-btn");
 
@@ -130,6 +142,3 @@ const inputBtn = document.querySelector("#input-btn");
 inputBtn.addEventListener("click", searchAttraction);
 // 按 enter 查詢
 inputVal.addEventListener("keydown", searchAttractionKeypress);
-
-
-
