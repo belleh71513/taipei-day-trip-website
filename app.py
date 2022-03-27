@@ -1,14 +1,12 @@
 from flask import *
 from api.api_attraction import attractions
 from api.api_user import user
-import os
 
 
 
 app=Flask(__name__,static_folder="static", static_url_path="/")
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
-app.secret_key = os.urandom(24)
 
 
 app.register_blueprint(attractions, url_prefix="/api")

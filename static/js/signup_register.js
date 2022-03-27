@@ -1,5 +1,4 @@
-// *********************登入 / 註冊 彈出視窗監聽事件*****************************
-
+// *********************登入 / 註冊 彈出視窗監聽事件****************************
 const loginLi = document.querySelector(".logout-li");
 const logoutA = document.querySelector(".logout-a");
 const loginSection = document.querySelector("#loginSection")
@@ -18,30 +17,28 @@ const registerPassword = document.querySelector("#registerPassword")
 const loginEmail = document.querySelector("#loginEmail")
 const loginPassword = document.querySelector("#loginPassword")
 
-const loginDisplay = (e) => {
-  e.preventDefault()
-  loginMessage.textContent = "";
+const clearFormInputValue = () => {
   loginEmail.value = "";
   loginPassword.value = "";
+  loginMessage.textContent = "";
+  registerName.value = "";
+  registerEmail.value= "";
+  registerPassword.value= "";
+  registerMessage.textContent = "";
+}
+const loginDisplay = (e) => {
+  e.preventDefault()
+  clearFormInputValue();
   loginSection.classList.toggle("show")
 }
 
 const registerDisplay = () => {
-  registerMessage.textContent = "";
+  clearFormInputValue();
   registerSection.classList.toggle("show")
-  registerName.value = "";
-  registerEmail.value= "";
-  registerPassword.value= "";
 }
 
 const loginRegisterSwitch = () => {
-  loginMessage.textContent = "";
-  registerMessage.textContent = "";
-  registerName.value = "";
-  registerEmail.value= "";
-  registerPassword.value= "";
-  loginEmail.value = "";
-  loginPassword.value = "";
+  clearFormInputValue();
   loginSection.classList.toggle("show")
   registerSection.classList.toggle("show")
 }
@@ -54,7 +51,6 @@ registerToggleBtn.addEventListener("click",loginRegisterSwitch)
 
 // ********************登入狀態確認****************************
 let apiURL = `${window.location.origin}/api/user`
-console.log(apiURL)
 function checkUserStatus(){
   fetch(apiURL,{
     method : "GET"
@@ -81,7 +77,7 @@ function register(e){
   const email = registerEmail.value
   const password = registerPassword.value
 
-  if (!name ||  !email || !password){
+  if (!name || !email || !password){
     registerMessage.textContent = "姓名、電子信箱或密碼欄位不得為空";
   }else{
     fetch(apiURL,{
@@ -106,8 +102,6 @@ function register(e){
       }
     })
   }
-
-
 }
 
 registerBtn.addEventListener("click", register)
@@ -141,7 +135,7 @@ function login(e){
         loginMessage.style.color = "black"
         setTimeout(() =>{
           window.location.reload()
-        },1500)
+        },1000)
       }else{
         loginMessage.textContent = data.message;
       }
@@ -167,8 +161,5 @@ function logout(){
 logoutA.addEventListener("click", (e) => {
   e.preventDefault();
   logout();
-  // setTimeout(()=>{
-  //   window.location.reload()
-  // },1000)
   }
 )
