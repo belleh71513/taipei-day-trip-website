@@ -376,7 +376,7 @@ main {
 }
 
 .booking-area > div {
-  margin: 10px 15px 25px 5px;
+  margin: 10px 15px 20px 5px;
 }
 
 .booking-main-type {
@@ -412,6 +412,7 @@ input {
   height: 35px;
   background: #ffffff;
   cursor: pointer;
+  padding: 10px 0 10px 5px;
 }
 
 .radio-input {
@@ -467,7 +468,7 @@ input {
 
 .booking-btn {
   display: block;
-  margin: 15px 0 10px 5px;
+  margin: 15px 0 5px 5px;
   padding: 10px;
   background: #448899;
   color: #fff;

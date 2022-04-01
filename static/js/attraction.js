@@ -8,6 +8,8 @@ const attractionAddressContent = document.querySelector(".attraction-address-con
 const attractionTransportContent = document.querySelector(".attraction-transport-content")
 const slideIconWrap = document.querySelector(".slide-icon-wrap")
 // ****************取得送出行程按鈕元素*********************
+const bookingDateInput= document.querySelector("#booking-date-input");
+const bookingAm= document.querySelector("#am");
 const bookingBtn = document.querySelector(".booking-btn")
 const buttonSapn = document.querySelector(".button-span")
 
@@ -165,11 +167,20 @@ arrowPre.addEventListener("click", () => {
 })
 
 // **********************預定行程功能************************
-let bookingURL = `${window.location.origin}/api/booking`
+let bookingURL = `${window.location.origin}/api/booking`;
+let now = new Date();
+let dd = now.getDate();
+let mm = now.getMonth()+1;
+let yyyy = now.getFullYear();
+if(dd < 10){
+  dd = "0" + dd
+}
+if(mm < 10){
+  mm = "0"+mm
+}
+now = yyyy+"-"+mm+"-"+dd;
+bookingDateInput.setAttribute("min", now)
 function sendBooking(){
-  const bookingDateInput= document.querySelector("#booking-date-input");
-  const bookingAm= document.querySelector("#am");
-
   let date = bookingDateInput.value
   let time = bookingAm.checked ? "morning" : "afternoon";
   let price = time == "morning" ? 2000 : 2500;

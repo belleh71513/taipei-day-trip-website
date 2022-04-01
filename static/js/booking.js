@@ -19,9 +19,15 @@ const footer = document.querySelector("footer")
 const mainNoBooking = document.querySelector(".main-no-booking");
 const noBookingHeader = document.querySelector(".no-booking-header");
 
+const contactName = document.querySelector("#contact-name");
+const contactEmail = document.querySelector("#contact-email");
+
+
+
 
 let data = null;
 let userName;
+let email;
 async function initBookingData(){
   const response = await fetch(bookingApiURL);
   const result = await response.json();
@@ -33,6 +39,7 @@ async function getUser(){
   const result = await response.json();
   if(result.data){
     userName = result.data.name;
+    email = result.data.email;
   }
   else{
     window.location.href = "/";
@@ -45,6 +52,7 @@ function renderBookingPage(){
   logoutA.classList.add("nav-a-show");
   if (data.data){
     let bookingData = data.data
+    let today = new Date();
     let dateFormat = new Date(bookingData.date)
     date = dateFormat.toISOString().split('T')[0]
 
@@ -52,14 +60,16 @@ function renderBookingPage(){
     bookingAttraction.textContent = `台北一日遊 : ${bookingData.attraction.name}`
 
     const img = document.createElement("img")
-    img.src = bookingData.attraction.image
+    img.src = bookingData.attraction.image;
 
-    bookingTimeText.textContent = bookingData.time == "morning" ? "早上 9 點到 下午 5點" : "下午 1 點到 下午 9點"
-    bookingDateText.textContent = date
-    bookingPriceText.textContent = `新台幣 ${bookingData.price} 元`
-    bookingAddressText.textContent = bookingData.attraction.address
-    confirmPrice.textContent = `新台幣 ${bookingData.price} 元`
+    bookingTimeText.textContent = bookingData.time == "morning" ? "早上 9 點到 下午 5點" : "下午 1 點到 下午 9點";
+    bookingDateText.textContent = date;
+    bookingPriceText.textContent = `新台幣 ${bookingData.price} 元`;
+    bookingAddressText.textContent = bookingData.attraction.address;
+    confirmPrice.textContent = `新台幣 ${bookingData.price} 元`;
 
+    contactName.setAttribute("value", userName)
+    contactEmail.setAttribute("value", email)
     attractionImg.appendChild(img)
   }else{
     noBookingData();
@@ -117,3 +127,5 @@ logoutA.addEventListener("click", (e) => {
   logout();
   }
 )
+
+
