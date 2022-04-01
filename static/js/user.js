@@ -9,6 +9,8 @@ const loginToggleBtn = document.querySelector(".login-toggle-btn");
 const registerToggleBtn = document.querySelector(".register-toggle-btn");
 const registerMessage = document.querySelector("#registerMessage");
 const loginMessage = document.querySelector("#loginMessage");
+// *********************預定行程元素*****************************
+const headerBookingTripBtn = document.querySelector(".booking-trip")
 // *********************註冊表單元素*****************************
 const registerName = document.querySelector("#registerName")
 const registerEmail = document.querySelector("#registerEmail")
@@ -163,3 +165,23 @@ logoutA.addEventListener("click", (e) => {
   logout();
   }
 )
+
+// *********************預定行程*****************************
+function bookingTrip(e){
+  e.preventDefault()
+  fetch(apiURL,{
+    method : "GET"
+  })
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    if(data.data){
+      location.href = "/booking"
+    }else{
+      clearFormInputValue();
+      loginSection.classList.toggle("show")
+    }
+  })
+}
+headerBookingTripBtn.addEventListener("click", bookingTrip)

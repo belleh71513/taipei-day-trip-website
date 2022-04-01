@@ -77,6 +77,10 @@ nav a {
 }
 
 /* =========================main主要設定========================= */
+.main-no-booking{
+  display: none;
+}
+
 .primary-type {
   font-size: 1rem;
   font-weight: 700;
@@ -99,7 +103,7 @@ nav a {
   border: 1px solid #e8e8e8;
 }
 /* =========================訂單內容區塊========================= */
-.booking-header {
+.booking-header,.no-booking-header {
   max-width: 980px;
   margin: 35px auto;
   font-size: 1.1875rem;
@@ -108,11 +112,40 @@ nav a {
   color: #666666;
 }
 
+.no-order-message {
+  display: none;
+  max-width: 980px;
+  margin: 35px auto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  color: #666666;
+}
+
+.no-order-message-show {
+  display: block;
+}
+
 .booking-info {
   display: flex;
   position: relative;
   max-width: 980px;
   margin: 0 auto;
+}
+
+.attraction-img {
+  flex-grow: 1;
+  width: 0;
+}
+
+.attraction-img img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+}
+
+.attraction-booking-info{
+  flex-grow: 1;
 }
 
 .attraction-booking-info .delete-icon {
@@ -217,6 +250,14 @@ label input {
   border: none;
   padding: 10px 20px;
 }
+
+.hidden{
+  display: none;
+}
+
+.show{
+  display: block;
+}
 /* ==========================footer區塊========================== */
 footer {
   display: flex;
@@ -229,6 +270,17 @@ footer {
   font-size: 1rem;
   font-weight: bold;
   color: #ffffff;
+}
+
+.no-order-footer {
+  align-items: start;
+  position: absolute;
+  bottom: 0;
+  height: 75vh;
+}
+
+.no-order-footer p {
+  padding-top: 45px;
 }
 
 /* ===========================RWD區塊=========================== */
@@ -255,6 +307,10 @@ footer {
 
   .booking-info {
     flex-direction: column;
+  }
+
+  .attraction-img{
+    width: 100%;
   }
 
   .attraction-img img {

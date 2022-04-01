@@ -1,4 +1,3 @@
-from mysql.connector import pooling
 from dotenv import load_dotenv
 import mysql.connector
 import os
@@ -64,8 +63,7 @@ def user_login(*data):
     sql = "SELECT * FROM user_table WHERE email=%s AND password=%s"
     cursor.execute(sql, data)
     result = cursor.fetchone()
-    if result:
-      return result
+    return result
   except:
     print("login function error")
   finally:

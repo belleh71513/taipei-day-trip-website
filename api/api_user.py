@@ -2,22 +2,20 @@ from flask import *
 from dotenv import load_dotenv
 from model.user import *
 from datetime import datetime, timedelta
-import os
 import jwt
 import time
+import os
 
 load_dotenv()
-
-app.secret_key = os.urandom(24)
-
 user = Blueprint("user", __name__)
+secret_key = os.getenv("secret_key")
 
 @user.route("/user", methods=["GET"])
 def api_user_check():
-  jwt_cookie = request.cookies.get("jwt_token")
+  jwt_cookie = request.cookies.get("jwt")
   if jwt_cookie:
-    jwt_decode = jwt.decode(jwt_cookie, key=app.secret_key, algorithms="HS256")
-    jwt_decode.pop("exp")
+    jwt_decode = jwt.decode(jwt_cookie, key=secret_key, algorithms="HS256")
+    # jwt_decode.pop("exp")
     res = {
         "data" : jwt_decode
       }
@@ -67,11 +65,11 @@ def api_user_login():
       }
       token = jwt.encode(
         payload,
-        app.secret_key,
+        secret_key,
         algorithm = "HS256"
       )
       res = make_response({"ok" : True}, 200)
-      res.set_cookie(key="jwt_token", value=token, expires=time.time()+3*60)
+      res.set_cookie(key="jwt", value=token, expires=time.time()+3*60)
       return res
     else:
       res = {
@@ -89,5 +87,5 @@ def api_user_login():
 @user.route("/user", methods=["DELETE"])
 def api_user_logout():
   res = make_response({"ok" : True}, 200)
-  res.set_cookie("jwt", value="", expires=0)
+  res.set_cookie(key="jwt", value="", expires=0)
   return res

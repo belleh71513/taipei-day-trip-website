@@ -408,6 +408,12 @@ input {
   column-gap: 10px;
 }
 
+#booking-date-input {
+  height: 35px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
 .radio-input {
   visibility: hidden;
 }
@@ -468,14 +474,24 @@ input {
   border: none;
   border-radius: 5px;
   font-size: 1rem;
+  cursor: pointer;
 }
 
+.button-span{
+  color: #f00;
+  font-size: 1rem;
+  margin-left: 5px;
+}
+
+/* ==================================== */
 .line {
   margin: 15px auto;
   max-width: 1200px;
   border: 1px solid #e8e8e8;
 }
 
+
+/* ====================================== */
 .attraction-info {
   max-width: 1200px;
   margin: 0 auto;

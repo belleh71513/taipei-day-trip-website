@@ -16,7 +16,7 @@
       <div class="header-text"><a href="/">台北一日遊</a></div>
       <nav>
         <ul>
-          <li><a href="/">預定行程</a></li>
+          <li class="booking-trip"><a href="/booking">預定行程</a></li>
           <li class="logout-li"><a id="login-register" href="/">登入/註冊</a></li>
           <li class="logout-a"><a class="logout" href="/">登出系統</a></li>
         </ul>
@@ -90,7 +90,7 @@
         <div class="booking-area-title booking-main-type">訂購導覽行程</div>
         <div class="booking-area-subtitle booking-secondary-type">以此景點為中心的一日行程，帶您探索城市角落故事</div>
         <div class="booking-area-date booking-main-type">選擇日期 :
-          <input id="booking-data-input" type="date" id=""></div>
+          <input id="booking-date-input" type="date" ></div>
         <div class="booking-area-time booking-main-type">選擇時間 :
           <input class="booking-time-radio radio-input" type="radio" id="am" name="time">
           <label class="booking-secondary-type radio-label am-label" for="am"><span class="radio-btn"></span>上半天</label>
@@ -102,7 +102,7 @@
             <!-- 費用 -->
           </div>
         </div>
-        <button class="booking-btn" >開始預訂行程</button>
+        <button type="button" class="booking-btn" >開始預訂行程</button><span class="button-span"></span>
       </div>
     </section>
   </main>
@@ -131,7 +131,9 @@
     <p>COPYRIGHT &copy; 2021 台北一日遊</p>
  </footer>
 
+ <!-- 較晚載入的js檔案可以讀取先載入檔案中的內容 -->
  <script src="{{ url_for('static', filename='/js/attraction.js') }}"></script>
- <script src="{{ url_for('static', filename='/js/signup_register.js') }}"></script>
+ <script src="{{ url_for('static', filename='/js/user.js') }}"></script>
+
 </body>
 </html>
