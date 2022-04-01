@@ -8,8 +8,6 @@ load_dotenv()
 booking = Blueprint("booking", __name__)
 secret_key = os.getenv("secret_key")
 
-
-
 @booking.route("/booking", methods=["GET"])
 def api_booking_get():
   token = request.cookies.get("jwt")

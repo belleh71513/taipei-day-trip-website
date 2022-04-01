@@ -22,9 +22,6 @@ const noBookingHeader = document.querySelector(".no-booking-header");
 const contactName = document.querySelector("#contact-name");
 const contactEmail = document.querySelector("#contact-email");
 
-
-
-
 let data = null;
 let userName;
 let email;
