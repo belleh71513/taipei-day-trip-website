@@ -15,7 +15,7 @@ img {
 }
 /* =========================header區塊========================= */
 header {
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   background-color: #fff;
   height: 58px;

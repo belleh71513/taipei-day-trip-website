@@ -1,27 +1,26 @@
 from flask import *
 from dotenv import load_dotenv
 from model.user import *
+from datetime import datetime, timedelta
+import jwt
+import time
+import os
 
 load_dotenv()
-
 user = Blueprint("user", __name__)
+secret_key = os.getenv("secret_key")
 
 @user.route("/user", methods=["GET"])
 def api_user_check():
-  email = session.get("email")
-  if email:
-    user_data = user_check_status(email)
-    if user_data:
-      res = {
-        "data" : {
-          "id" : user_data[0],
-          "name" : user_data[1],
-          "email" : user_data[2]
-        }
+  jwt_cookie = request.cookies.get("jwt")
+  if jwt_cookie:
+    jwt_decode = jwt.decode(jwt_cookie, key=secret_key, algorithms="HS256")
+    # jwt_decode.pop("exp")
+    res = {
+        "data" : jwt_decode
       }
-      return jsonify(res), 200
+    return jsonify(res), 200
   return jsonify({"data" : None})
-
 
 @user.route("/user", methods=["POST"])
 def api_user_register():
@@ -58,12 +57,20 @@ def api_user_login():
     password = login_data["password"]
     login_status = user_login(email, password)
     if login_status:
-      session["id"] = login_status[0]
-      session["name"] = login_status[1]
-      session["email"] = login_status[2]
-      session["password"] = login_status[3]
-      res = {"ok" : True}
-      return jsonify(res), 200
+      payload = {
+        "id" : login_status[0],
+        "name" : login_status[1],
+        "email" : login_status[2],
+        "exp" : datetime.utcnow() + timedelta(minutes=30)
+      }
+      token = jwt.encode(
+        payload,
+        secret_key,
+        algorithm = "HS256"
+      )
+      res = make_response({"ok" : True}, 200)
+      res.set_cookie(key="jwt", value=token, expires=time.time()+3*60)
+      return res
     else:
       res = {
         "error" : True,
@@ -79,5 +86,6 @@ def api_user_login():
 
 @user.route("/user", methods=["DELETE"])
 def api_user_logout():
-  session.pop("email", None)
-  return jsonify({"ok" : True}), 200
+  res = make_response({"ok" : True}, 200)
+  res.set_cookie(key="jwt", value="", expires=0)
+  return res

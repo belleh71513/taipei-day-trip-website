@@ -1,4 +1,3 @@
-from mysql.connector import pooling
 from dotenv import load_dotenv
 import mysql.connector
 import os
@@ -27,8 +26,6 @@ def user_check_status(email):
     result = cursor.fetchone()
     if result :
       return result
-    else:
-      return False
   except:
     print("check_status function error")
   finally:
@@ -50,8 +47,6 @@ def user_register(*data):
       check_register = confirm_register_successful(email)
       if check_register:
         return True
-      else:
-        return False
     else:
       return False
   except:
@@ -68,10 +63,7 @@ def user_login(*data):
     sql = "SELECT * FROM user_table WHERE email=%s AND password=%s"
     cursor.execute(sql, data)
     result = cursor.fetchone()
-    if result:
-      return result
-    else:
-      return False
+    return result
   except:
     print("login function error")
   finally:

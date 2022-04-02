@@ -1,0 +1,338 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+img {
+  vertical-align: top;
+}
+/* =========================header區塊========================= */
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  height: 58px;
+  z-index: 1;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+header .header-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .header-text {
+  width: 150px;
+}
+
+.header-text-a {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #448899;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  padding: 10px 10px;
+}
+
+nav a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #666666;
+  font-weight: 400;
+}
+
+.logout-a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #666666;
+  font-weight: 400;
+  display: none;
+}
+
+.nav-a-show {
+  display: block;
+}
+
+.nav-a-hidden {
+  display: none;
+  padding: 0;
+}
+
+/* =========================main主要設定========================= */
+.main-no-booking{
+  display: none;
+}
+
+.primary-type {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #666666;
+}
+
+.secondary-type {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666666;
+}
+
+.flex {
+  display: flex;
+}
+
+.hr-line {
+  max-width: 1200px;
+  margin: 35px auto;
+  border: 1px solid #e8e8e8;
+}
+/* =========================訂單內容區塊========================= */
+.booking-header,.no-booking-header {
+  max-width: 980px;
+  margin: 35px auto;
+  font-size: 1.1875rem;
+  font-style: normal;
+  font-weight: 700;
+  color: #666666;
+}
+
+.no-order-message {
+  display: none;
+  max-width: 980px;
+  margin: 35px auto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  color: #666666;
+}
+
+.no-order-message-show {
+  display: block;
+}
+
+.booking-info {
+  display: flex;
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.attraction-img {
+  flex-grow: 1;
+  width: 0;
+}
+
+.attraction-img img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+}
+
+.attraction-booking-info{
+  flex-grow: 1;
+}
+
+.attraction-booking-info .delete-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  margin: 0;
+}
+
+.delete-icon > img {
+  width: 30px;
+  height: 30px;
+}
+
+.attraction-booking-info .booking-attraction {
+  margin: 2px 0 15px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #448899;
+}
+
+.attraction-booking-info > div {
+  margin: 10px 0 10px 20px;
+}
+
+.primary-type > p {
+  margin-left: 10px;
+}
+
+label {
+  display: block;
+}
+
+.title {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  color: #666666;
+}
+
+.contact-reminder {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #666666;
+}
+/* =========================contactd區塊========================= */
+.contact-info {
+  max-width: 980px;
+  margin: 0 auto;
+}
+.contact-container div {
+  margin: 15px 0 20px 0;
+}
+
+.contact-container > label {
+  margin: 15px 0 20px 0;
+}
+
+label input {
+  width: 200px;
+  height: 40px;
+  margin-left: 10px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+}
+/* =======================credit card區塊======================= */
+.creditcard-info {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.creditcard-container div {
+  margin: 15px 0 20px 0;
+}
+
+.creditcard-container > label {
+  margin: 15px 0 20px 0;
+}
+/* =======================booking confirm區塊======================= */
+.booking-confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.confirm-total-price {
+  display: flex;
+  margin-bottom: 25px;
+}
+.confirm-btn {
+  width: 175px;
+  margin-bottom: 35px;
+  background: #448899;
+  border-radius: 5px;
+  font-size: 1.1875rem;
+  font-weight: 400;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  padding: 10px 20px;
+}
+
+.hidden{
+  display: none;
+}
+
+.show{
+  display: block;
+}
+/* ==========================footer區塊========================== */
+footer {
+  display: flex;
+  margin-top: 30px;
+  background: #757575;
+  width: 100%;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.no-order-footer {
+  align-items: start;
+  position: absolute;
+  bottom: 0;
+  height: 75vh;
+}
+
+.no-order-footer p {
+  padding-top: 45px;
+}
+
+/* ===========================RWD區塊=========================== */
+
+@media screen and (max-width: 1200px) {
+  main {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  header .header-container {
+    padding: 10px 10px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header .header-container {
+    padding: 10px 10px;
+  }
+
+  main {
+    width: 95%;
+  }
+
+  .booking-info {
+    flex-direction: column;
+  }
+
+  .attraction-img{
+    width: 100%;
+  }
+
+  .attraction-img img {
+    width: 100%;
+  }
+
+  .attraction-booking-info {
+    position: relative;
+  }
+
+  .attraction-booking-info .booking-attraction {
+    margin: 20px 0 20px 0;
+  }
+
+  .attraction-booking-info .delete-icon {
+    position: absolute;
+    top: 185px;
+    right: 0;
+    margin: 0;
+  }
+
+  .attraction-booking-info > div {
+    margin: 10px 0;
+  }
+}
