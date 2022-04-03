@@ -10,6 +10,7 @@ const slideIconWrap = document.querySelector(".slide-icon-wrap")
 // ****************取得送出行程按鈕元素*********************
 const bookingDateInput= document.querySelector("#booking-date-input");
 const bookingAm= document.querySelector("#am");
+const bookingPm= document.querySelector("#pm");
 const bookingBtn = document.querySelector(".booking-btn")
 const buttonSapn = document.querySelector(".button-span")
 
@@ -168,6 +169,7 @@ arrowPre.addEventListener("click", () => {
 
 // **********************預定行程功能************************
 let bookingURL = `${window.location.origin}/api/booking`;
+// 設置date input min屬性，限制使用者只能從當下選擇之後的日期
 let now = new Date();
 let dd = now.getDate();
 let mm = now.getMonth()+1;
@@ -178,51 +180,59 @@ if(dd < 10){
 if(mm < 10){
   mm = "0"+mm
 }
-now = yyyy+"-"+mm+"-"+dd;
+now = `${yyyy}-${mm}-${dd}`
 bookingDateInput.setAttribute("min", now)
+// **********************送出預定行程************************
 function sendBooking(){
-  let date = bookingDateInput.value
-  let time = bookingAm.checked ? "morning" : "afternoon";
-  let price = time == "morning" ? 2000 : 2500;
-  if (!time || !date){
-    buttonSapn.textContent = "日期或時間欄位未選取"
-    setTimeout(() => {
-      buttonSapn.textContent = "";
-    },2000)
-  }
+  // 先檢查使用者是否登入，有的話才送出訂單資料，沒有就彈出登入視窗
   fetch(apiURL)
   .then(response => {
     return response.json();
   })
   .then(data => {
     if(data.data){
-      const bookingData = {
-        "attractionId" : parseInt(attractionID),
-        "date" : date,
-        "time" : time,
-        "price" : price
+      let date = bookingDateInput.value
+      let timeAm = bookingAm.checked ? "morning" : false;
+      let timePm = bookingPm.checked ? "afternoon" : false;
+      let time;
+      if (timeAm){time = timeAm} else if(timePm){time = timePm} else{time = null}
+      let price = time == "morning" ? 2000 : 2500;
+      if (!time || !date){
+        buttonSapn.textContent = "日期或時間欄位未選取"
+        setTimeout(() => {
+          buttonSapn.textContent = "";
+        },2000)
+      }else{
+        const bookingData = {
+          "attractionId" : parseInt(attractionID),
+          "date" : date,
+          "time" : time,
+          "price" : price
+        }
+        fetch(bookingURL,{
+          method : "POST",
+          headers : {
+            "Content-Type" : "application/json"
+          },
+          body : JSON.stringify(bookingData)
+        })
+        .then(response => {
+          return response.json()
+        })
+        // 訂單成立轉至booking page
+        .then(data => {
+          if(data.ok){
+            window.location.href = "/booking"
+          }
+          else if(data.error){
+            console.log(data.message)
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
       }
-      fetch(bookingURL,{
-        method : "POST",
-        headers : {
-          "Content-Type" : "application/json"
-        },
-        body : JSON.stringify(bookingData)
-      })
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        if(data.ok){
-          window.location.href = "/booking"
-        }
-        else if(data.error){
-          console.log(data.message)
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
+
     }
     else{
       clearFormInputValue();
