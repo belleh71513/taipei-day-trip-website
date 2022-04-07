@@ -5,7 +5,6 @@ from datetime import datetime
 import os
 import jwt
 
-
 load_dotenv()
 booking = Blueprint("booking", __name__)
 secret_key = os.getenv("secret_key")
@@ -62,7 +61,7 @@ def api_booking_post():
       time = booking_data["time"]
       price = booking_data["price"]
       insert_data = booking_insert_data(date, time, price, attraction_id, user_id)
-      if not (date and time and price and attraction_id and user_id):
+      if not (date or time or price or attraction_id or user_id):
         res = {
           "error" : True,
           "message" : "建立失敗，輸入不正確或其他原因"

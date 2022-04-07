@@ -183,8 +183,9 @@ if(mm < 10){
 now = `${yyyy}-${mm}-${dd}`
 bookingDateInput.setAttribute("min", now)
 // **********************送出預定行程************************
-function sendBooking(){
+function sendBooking(e){
   // 先檢查使用者是否登入，有的話才送出訂單資料，沒有就彈出登入視窗
+  e.preventDefault()
   fetch(apiURL)
   .then(response => {
     return response.json();
@@ -194,8 +195,7 @@ function sendBooking(){
       let date = bookingDateInput.value
       let timeAm = bookingAm.checked ? "morning" : false;
       let timePm = bookingPm.checked ? "afternoon" : false;
-      let time;
-      if (timeAm){time = timeAm} else if(timePm){time = timePm} else{time = null}
+      let time = timeAm ? timeAm : timePm;
       let price = time == "morning" ? 2000 : 2500;
       if (!time || !date){
         buttonSapn.textContent = "日期或時間欄位未選取"
