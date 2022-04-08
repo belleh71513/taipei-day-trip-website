@@ -1,6 +1,7 @@
 from mysql.connector import pooling
 from dotenv import load_dotenv
-from flask import request
+import requests
+import json
 import mysql.connector
 import os
 
@@ -26,14 +27,15 @@ def order_get(orderNumber, user_id):
     cursor = con.cursor(dictionary=True)
     sql = """
           SELECT o.order_number, o.price, o.attraction_id, a.name AS attraction_name,
-          a.address AS attraction_address, a.image AS attraction_image, o.date, o.time, o.name, o.email, o.phone , o.payment_status FROM order_table AS o JOIN attraction_table AS a
+          a.address AS attraction_address, a.images AS attraction_images, o.date, o.time, o.name, o.email, o.phone , o.payment_status FROM order_table AS o JOIN attraction_table AS a
           ON o.attraction_id = a.id WHERE o.order_number = %s AND o.user_id = %s
         """
     cursor.execute(sql, (orderNumber, user_id))
     result = cursor.fetchone()
     return result
-  except:
-    print("order_get function error")
+  except mysql.connector.Error as err:
+    print(f"order_get function{err}")
+    return False
   finally:
     if con.in_transaction:
       con.rollback()
@@ -43,15 +45,16 @@ def order_insert(*data):
   try:
     con = pool.get_connection()
     cursor = con.cursor()
+    print(data)
     sql = """
-          INSERT INTO order_table (order_number, price, attraction_id, date, time, name, email, phone)
-          VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+          INSERT INTO order_table (order_number, price, attraction_id, date, time, name, email, phone, user_id)
+          VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
           """
     cursor.execute(sql, data)
     con.commit()
     return True
-  except:
-    print("order_insert function error")
+  except mysql.connector.Error as err:
+    print(f"order_insert function {err}")
     return False
   finally:
     if con.in_transaction:
@@ -66,15 +69,15 @@ def order_update(user_id, order_number):
     cursor.execute(sql, (user_id, order_number))
     con.commit()
     return True
-  except:
-    print("order_updata fucntion error")
+  except mysql.connector.Error as err:
+    print(f"order_update function {err}")
     return False
   finally:
     if con.in_transaction:
       con.rollback()
     con.close()
 
-def tappay(data):
+def tappay(**data):
   prime = data["prime"]
   price = data["price"]
   phone_number = data["phone"]
@@ -86,7 +89,7 @@ def tappay(data):
     "Content-Type": "application/json",
     "x-api-key": os.getenv("tappay_partner_key")
   }
-  tappay_request_body = {
+  tappay_request_body = json.dumps({
     "prime": prime,
     "partner_key": os.getenv("tappay_partner_key"),
     "merchant_id": os.getenv("tappay_merchant_id"),
@@ -98,10 +101,9 @@ def tappay(data):
         "email": email
     },
     "remember": False
-  }
-  req = request.post(tap_url, json=tappay_request_body, headers=tappay_headers)
+  })
+  req = requests.post(tap_url, data=tappay_request_body, headers=tappay_headers)
   res = req.json()
-  print(res)
   status = res["status"]
   if status == 0:
     return True

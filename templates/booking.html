@@ -5,13 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>台北一日遊</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='/css/booking.css')}}">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://js.tappaysdk.com/tpdirect/v5.9.0"></script>
+
+
+
 </head>
 <body>
   <header>
@@ -56,7 +56,7 @@
         <div class="title contact-title">您的聯絡資訊</div>
         <label class="secondary-type" for="title">聯絡姓名&nbsp;&nbsp;:<input id="contact-name" type="text" id="title"></label>
         <label class="secondary-type" for="email">聯絡信箱&nbsp;&nbsp;:<input id="contact-email" type="text" id="email"></label>
-        <label class="secondary-type" for="phone-number">手機號碼&nbsp;&nbsp;:<input type="text" id="phone-number"></label>
+        <label class="secondary-type" for="phone-number">手機號碼&nbsp;&nbsp;:<input type="tel" id="phone-number"></label>
         <div class="contact-reminder">請保持手機通暢，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
       </div>
     </section>
@@ -67,16 +67,13 @@
       <div class="creditcard-container" id="tap-container">
         <div class="title creditcard-title">信用卡付款資訊</div>
         <div class="card-number-group">
-          <label class="secondary-type" for="card-number">卡片號碼&nbsp;&nbsp;:</label>
-          <div class="tpfield" id="card-number"></div>
+          <label class="secondary-type" for="card-number">卡片號碼&nbsp;&nbsp;:<div id="card-number" class="tpfield"></div></label>
         </div>
         <div class="card-exp-date-group">
-          <label class="secondary-type" for="card-expirationr">過期時間&nbsp;&nbsp;:</label>
-          <div class="tpfield" id="card-exp-date"></div>
+          <label class="secondary-type" for="card-expirationr">過期時間&nbsp;&nbsp;:<div id="card-exp-date" class="tpfield"></div></label>
         </div>
-        <div class="card-ccv-group" id="card-ccv">
-          <label class="secondary-type" for="card-security-code">驗證密碼&nbsp;&nbsp;:</label>
-          <div class="tpfield" id="card-ccv"></div>
+        <div class="card-ccv-group ">
+          <label class="secondary-type" for="card-security-code">驗證密碼&nbsp;&nbsp;:<div id="card-ccv" class="tpfield"></div></label>
         </div>
       </div>
 
@@ -85,6 +82,7 @@
       <div class="booking-confirm">
         <div class="primary-type confirm-total-price">總價&nbsp;&nbsp;:<p class="confirm-price"><!--總價-->>></p></div>
         <button type="submit" class="confirm-btn">確認訂購並付款</button>
+        <p id="confirm-message"></p>
       </div>
     </form>
 
@@ -96,7 +94,9 @@
     <p>COPYRIGHT &copy; 2021 台北一日遊</p>
  </footer>
 
- <script src="{{ url_for('static', filename='/js/booking.js') }}"></script>
+ <script src="https://js.tappaysdk.com/tpdirect/v5.9.0"></script>
+ <script src="{{url_for('static', filename='/js/booking.js')}}"></script>
+
 
 
 </body>

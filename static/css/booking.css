@@ -135,7 +135,7 @@ nav a {
 
 .attraction-img {
   flex-grow: 1;
-  width: 0;
+  max-width: 40%;
 }
 
 .attraction-img img {
@@ -168,7 +168,7 @@ nav a {
 }
 
 .attraction-booking-info > div {
-  margin: 10px 0 10px 20px;
+  margin: 20px 0 20px 20px;
 }
 
 .primary-type > p {
@@ -218,11 +218,24 @@ label input {
   margin: 0 auto;
 }
 
-.creditcard-container div {
-  margin: 15px 0 20px 0;
+.tpfield{
+  width: 200px;
+  height: 40px;
+  margin-left: 10px;
+  padding: 10px;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
 }
 
-.creditcard-container > label {
+/* .creditcard-container div {
+  margin: 15px 0 20px 0;
+} */
+
+.card-number-group >label,
+.card-exp-date-group >label,
+.card-ccv-group >label{
+  display: flex;
+  align-items: center;
   margin: 15px 0 20px 0;
 }
 /* =======================booking confirm區塊======================= */
@@ -249,6 +262,7 @@ label input {
   outline: none;
   border: none;
   padding: 10px 20px;
+  cursor: pointer;
 }
 
 .hidden{
@@ -310,7 +324,7 @@ footer {
   }
 
   .attraction-img{
-    width: 100%;
+    max-width: 100%;
   }
 
   .attraction-img img {
