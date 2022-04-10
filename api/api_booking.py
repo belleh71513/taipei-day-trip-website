@@ -1,6 +1,7 @@
 from flask import *
 from dotenv import load_dotenv
 from model.booking import booking_select_data, booking_insert_data, booking_data_delete
+from datetime import datetime
 import os
 import jwt
 
@@ -60,10 +61,15 @@ def api_booking_post():
       time = booking_data["time"]
       price = booking_data["price"]
       insert_data = booking_insert_data(date, time, price, attraction_id, user_id)
-      if not (date and time and price and attraction_id and user_id):
+      if not (date or time or price or attraction_id or user_id):
         res = {
           "error" : True,
           "message" : "建立失敗，輸入不正確或其他原因"
+        }
+      elif date < datetime.now().strftime("%Y-%m-%d"):
+        res = {
+          "error" : True,
+          "message" : "日期選擇不正確，請重新選擇"
         }
       if insert_data:
         res = {"ok" : True}
@@ -89,7 +95,7 @@ def delete_booking_data():
       jwt_data = jwt.decode(token, secret_key, algorithms="HS256")
       user_id = int(jwt_data["id"])
       check_delete_data = booking_data_delete(user_id)
-      if not check_delete_data:
+      if check_delete_data is None:
         res = {"ok" : True}
         return jsonify(res), 200
   except:

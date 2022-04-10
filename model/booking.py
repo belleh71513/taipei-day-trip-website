@@ -2,7 +2,6 @@ from mysql.connector import pooling
 from dotenv import load_dotenv
 import mysql.connector
 import os
-import datetime
 
 load_dotenv()
 
@@ -31,10 +30,7 @@ def booking_select_data(user_id):
             """
     cursor.execute(sql, (user_id,))
     result = cursor.fetchone()
-    if result:
-      return result
-    else:
-      return None
+    return result
   except:
     print("booking_select_data function error")
   finally:
@@ -73,7 +69,7 @@ def booking_data_delete(user_id):
     con.commit()
     result = check_data_status(user_id)
     if not result:
-      return False
+      return None
   except:
     print("delete_booking_data function error")
   finally:
@@ -88,10 +84,10 @@ def check_data_status(user_id):
     sql = "SELECT * FROM booking_table WHERE user_id=%s"
     cursor.execute(sql, (user_id,))
     result = cursor.fetchone()
-    if not result :
-      return False
-    else:
+    if result :
       return True
+    else:
+      return False
   except:
     print("check_data_status function error")
   finally:
