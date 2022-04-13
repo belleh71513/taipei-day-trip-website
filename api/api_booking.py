@@ -41,7 +41,6 @@ def api_booking_get():
       res = {"data" : None}
     return jsonify(res), 200
 
-
 @booking.route("/booking", methods=["POST"])
 def api_booking_post():
   try:
@@ -66,6 +65,7 @@ def api_booking_post():
           "error" : True,
           "message" : "建立失敗，輸入不正確或其他原因"
         }
+      # 預定日期不得小於當下日期
       elif date < datetime.now().strftime("%Y-%m-%d"):
         res = {
           "error" : True,

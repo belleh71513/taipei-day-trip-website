@@ -29,6 +29,20 @@ def api_user_register():
     name = register_data["name"]
     email = register_data["email"]
     password = register_data["password"]
+    email_check = email_regex_check(email)
+    password_check = password_regex_check(password)
+    if not email_check:
+      res = {
+          "error" : True,
+          "message" : "註冊失敗 , Email格式錯誤"
+        }
+      return jsonify(res), 400
+    elif not password_check:
+      res = {
+          "error" : True,
+          "message" : "註冊失敗 , 密碼格式錯誤"
+        }
+      return jsonify(res), 400
 
     register_status = user_register(name, email, password)
     if register_status:

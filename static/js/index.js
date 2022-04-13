@@ -1,6 +1,8 @@
 // ********************取得元素*************************
 const secondSection = document.querySelector(".second-section");
 const footer = document.querySelector("footer");
+const loader = document.querySelector(".loader")
+
 
 // ********************取得資料*************************
 // page從 0 開始搜尋
@@ -30,7 +32,10 @@ async function getData(){
 function renderPage (){
   let attData = data.data;
   nextPage = data.nextPage;
+  loader.style.display = "block";
+
   // 有資料就渲染頁面
+  // loader.style.display = "block";
   if (attData){
     for(let item of attData){
     gridBox = document.createElement("div");
@@ -75,6 +80,7 @@ function renderPage (){
     secondSection.appendChild(searchMessage);
   }
   // 記錄下一頁的資料
+  loader.style.display = "none";
   page = nextPage;
 }
 
@@ -85,7 +91,6 @@ async function init(){
   dataSrc();
 }
 init()
-
 
 function dataSrc(){
   const originImg = document.querySelectorAll(".origin-img")

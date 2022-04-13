@@ -152,6 +152,10 @@ nav a {
   cursor: pointer;
 }
 
+.login-btn:hover {
+  background : #627170;
+}
+
 .login p {
   text-align: center;
   color: #f00;
@@ -249,6 +253,10 @@ nav a {
   cursor: pointer;
 }
 
+.register-btn:hover {
+  background : #627170;
+}
+
 .register p {
   color: #f00;
   text-align: center;
@@ -256,6 +264,14 @@ nav a {
 
 .show {
   display: block;
+}
+
+input.valid {
+  border:1px solid green;
+}
+
+input.invalid {
+  border:1px solid red;
 }
 /* =========================main區塊========================= */
 main {

@@ -170,41 +170,41 @@ const setup = {
 
 TPDirect.card.setup(setup)
 
-TPDirect.card.onUpdate(function (update) {
+// TPDirect.card.onUpdate(function (update) {
 
-  if (update.canGetPrime) {
-      // submitButton.removeAttribute('disabled')
-      $('button[type="submit"]').removeAttr('disabled')
-  } else {
-      // submitButton.setAttribute('disabled', true)
-      $('button[type="submit"]').attr('disabled', true)
-  }
+//   if (update.canGetPrime) {
+//       // submitButton.removeAttribute('disabled')
+//       $('button[type="submit"]').removeAttr('disabled')
+//   } else {
+//       // submitButton.setAttribute('disabled', true)
+//       $('button[type="submit"]').attr('disabled', true)
+//   }
 
-  // number 欄位是錯誤的
-  if (update.status.number === 2) {
-      setNumberFormGroupToError('.card-number-group')
-  } else if (update.status.number === 0) {
-      setNumberFormGroupToSuccess('.card-number-group')
-  } else {
-      setNumberFormGroupToNormal('.card-number-group')
-  }
+//   // number 欄位是錯誤的
+//   if (update.status.number === 2) {
+//       setNumberFormGroupToError('.card-number-group')
+//   } else if (update.status.number === 0) {
+//       setNumberFormGroupToSuccess('.card-number-group')
+//   } else {
+//       setNumberFormGroupToNormal('.card-number-group')
+//   }
 
-  if (update.status.expiry === 2) {
-      setNumberFormGroupToError('.card-exp-date-group')
-  } else if (update.status.expiry === 0) {
-      setNumberFormGroupToSuccess('.card-exp-date-group')
-  } else {
-      setNumberFormGroupToNormal('.card-exp-date-group')
-  }
+//   if (update.status.expiry === 2) {
+//       setNumberFormGroupToError('.card-exp-date-group')
+//   } else if (update.status.expiry === 0) {
+//       setNumberFormGroupToSuccess('.card-exp-date-group')
+//   } else {
+//       setNumberFormGroupToNormal('.card-exp-date-group')
+//   }
 
-  if (update.status.cvc === 2) {
-      setNumberFormGroupToError('.card-ccv-group')
-  } else if (update.status.cvc === 0) {
-      setNumberFormGroupToSuccess('.card-ccv-group')
-  } else {
-      setNumberFormGroupToNormal('.card-ccv-group')
-  }
-})
+//   if (update.status.cvc === 2) {
+//       setNumberFormGroupToError('.card-ccv-group')
+//   } else if (update.status.cvc === 0) {
+//       setNumberFormGroupToSuccess('.card-ccv-group')
+//   } else {
+//       setNumberFormGroupToNormal('.card-ccv-group')
+//   }
+// })
 
 // 按下送出button觸發事件
 const orderApiURL = `${window.location.origin}/api/orders`;
@@ -213,10 +213,23 @@ let prime = null;
 function getPrime(e) {
   e.preventDefault();
   const tappayStatus = TPDirect.card.getTappayFieldsStatus();
-
+  console.log(contactPhone.value)
+  if (!contactPhone.value){
+    confirmMessage.style.color = "#f00";
+    confirmMessage.textContent = "手機號碼欄位不得空白!"
+    setTimeout(() => {
+      confirmMessage.textContent = "";
+    },1500)
+    return
+  }
   // 確認是否可以 getPrime
   if(tappayStatus.canGetPrime === false) {
-    confirmMessage.textContent = "請確認信用卡資訊是否正確"
+    confirmMessage.style.color = "#f00";
+    confirmMessage.textContent = "請確認信用卡資訊是否正確!"
+
+    setTimeout(() => {
+      confirmMessage.textContent = "";
+    },1500)
     return
   }
   // Get Prime
@@ -233,9 +246,9 @@ function getPrime(e) {
 function snedPrimeToBackend(prime){
     // send prime to your server, to pay with Pay by Prime API .
     // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
-    console.log("backprime",prime)
     let dateFormat = new Date(bookingData.date);
     let date = dateFormat.toISOString().split('T')[0];
+
     const primeData = {
       "prime" : prime,
       "order" : {

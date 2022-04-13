@@ -27,14 +27,15 @@ def order_get(orderNumber, user_id):
     cursor = con.cursor(dictionary=True)
     sql = """
           SELECT o.order_number, o.price, o.attraction_id, a.name AS attraction_name,
-          a.address AS attraction_address, a.images AS attraction_images, o.date, o.time, o.name, o.email, o.phone , o.payment_status FROM order_table AS o JOIN attraction_table AS a
+          a.address AS attraction_address, a.images AS attraction_images, o.date, o.time,
+          o.name, o.email, o.phone , o.payment_status FROM order_table AS o JOIN attraction_table AS a
           ON o.attraction_id = a.id WHERE o.order_number = %s AND o.user_id = %s
         """
     cursor.execute(sql, (orderNumber, user_id))
     result = cursor.fetchone()
     return result
   except mysql.connector.Error as err:
-    print(f"order_get function{err}")
+    print(f"order.py order_get function{err}")
     return False
   finally:
     if con.in_transaction:
@@ -45,7 +46,8 @@ def order_insert(*data):
   try:
     con = pool.get_connection()
     cursor = con.cursor()
-    print(data)
+
+
     sql = """
           INSERT INTO order_table (order_number, price, attraction_id, date, time, name, email, phone, user_id)
           VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
@@ -54,7 +56,7 @@ def order_insert(*data):
     con.commit()
     return True
   except mysql.connector.Error as err:
-    print(f"order_insert function {err}")
+    print(f"order.py order_insert function {err}")
     return False
   finally:
     if con.in_transaction:
@@ -70,21 +72,21 @@ def order_update(user_id, order_number):
     con.commit()
     return True
   except mysql.connector.Error as err:
-    print(f"order_update function {err}")
+    print(f"order.py order_update function {err}")
     return False
   finally:
     if con.in_transaction:
       con.rollback()
     con.close()
 
-def tappay(**data):
+def connect_tappay(**data):
   prime = data["prime"]
   price = data["price"]
   phone_number = data["phone"]
   name = data["name"]
   email = data["email"]
 
-  tap_url = "https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
+  tappay_url = "https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
   tappay_headers = {
     "Content-Type": "application/json",
     "x-api-key": os.getenv("tappay_partner_key")
@@ -102,7 +104,7 @@ def tappay(**data):
     },
     "remember": False
   })
-  req = requests.post(tap_url, data=tappay_request_body, headers=tappay_headers)
+  req = requests.post(tappay_url, data=tappay_request_body, headers=tappay_headers)
   res = req.json()
   status = res["status"]
   if status == 0:

@@ -27,6 +27,10 @@ const clearFormInputValue = () => {
   registerEmail.value= "";
   registerPassword.value= "";
   registerMessage.textContent = "";
+  inputs.forEach(input => {
+    input.classList.remove("valid")
+    input.classList.remove("invalid")
+  })
 }
 const loginDisplay = (e) => {
   e.preventDefault()
@@ -79,31 +83,41 @@ function register(e){
   const email = registerEmail.value
   const password = registerPassword.value
 
+  const emailPattern =  /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+  // 至少 8 個字最多16個字，至少一個英文字母和一個数字：
+  const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/;
+  const eamilCheck = emailPattern.test(email);
+  const passwordCheck = passwordPattern.test(password);
+
   if (!name || !email || !password){
-    registerMessage.textContent = "姓名、電子信箱或密碼欄位不得為空";
-  }else{
-    fetch(apiURL,{
-      method : "POST",
-      headers: {
-        "Content-Type" : "application/json"
-      },
-      body : JSON.stringify({
-        "name" : name,
-        "email" : email,
-        "password" : password
-      })
-    })
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      if(data.ok === true){
-        registerMessage.textContent = "註冊成功";
-      }else{
-        registerMessage.textContent = data.message;
-      }
-    })
+    return registerMessage.textContent = "姓名、電子信箱或密碼欄位不得為空";
+  }else if(!eamilCheck){
+    return registerMessage.textContent = "Email不符合格式，請重新輸入";
+  }else if(!passwordCheck){
+    return registerMessage.textContent = "密碼不符合格式，請重新輸入";
   }
+  fetch(apiURL,{
+    method : "POST",
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    body : JSON.stringify({
+      "name" : name,
+      "email" : email,
+      "password" : password
+    })
+  })
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    if(data.ok === true){
+      registerMessage.textContent = "註冊成功，請點選下方連結前往登入";
+    }else{
+      registerMessage.textContent = data.message;
+    }
+  })
+
 }
 
 registerBtn.addEventListener("click", register)
@@ -185,3 +199,17 @@ function bookingTrip(e){
   })
 }
 headerBookingTripBtn.addEventListener("click", bookingTrip)
+
+
+let inputs = document.querySelectorAll("input")
+inputs.forEach( input => {
+  input.addEventListener("input", () => {
+    if(input.checkValidity()) {
+      input.classList.add("valid")
+      input.classList.remove("invalid")
+    }else {
+      input.classList.remove("valid")
+      input.classList.add("invalid")
+    }
+  })
+})

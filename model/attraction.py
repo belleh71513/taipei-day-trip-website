@@ -43,8 +43,8 @@ def select_attractions(**kwargs):
       results = cursor.fetchall()
       data = get_per_col(results)
       return data
-  except :
-    print("select_attractions error")
+  except mysql.connector.Error as err:
+    print(f"attraction.py select_attractions function {err}")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -115,8 +115,8 @@ def select_att_id(att_id):
         "message": "景點編號不正確"
       }
       return res
-  except :
-    print("select_att_id fucntion error")
+  except mysql.connector.Error as err:
+    print(f"attraction.py select_att_id function {err}")
   finally:
     if con.in_transaction:
       con.rollback()

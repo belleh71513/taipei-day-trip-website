@@ -24,7 +24,6 @@ async function getUser(){
 }
 
 const orderNumber = window.location.search.split("=").pop()
-console.log(orderNumber)
 
 function renderThankyouPage(){
   orderSuccessTitle.textContent = "行程預定成功";
