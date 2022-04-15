@@ -56,6 +56,7 @@ function renderBookingPage(){
   if (data.data){
     bookingData = data.data;
     // 轉換date格式
+    document.title = `台北一日遊 - ${bookingData.attraction.name}`;
     let dateFormat = new Date(bookingData.date);
     let date = dateFormat.toISOString().split('T')[0];
 

@@ -1,0 +1,363 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+img {
+  vertical-align: top;
+}
+
+/* =========================header區塊========================= */
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  height: 58px;
+  z-index: 1;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+header .header-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .header-text {
+  width: 150px;
+}
+
+.header-text-a {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #448899;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  padding: 10px 10px;
+}
+
+nav a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #666666;
+  font-weight: 400;
+}
+
+.logout-a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #666666;
+  font-weight: 400;
+  display: none;
+}
+
+.nav-a-show {
+  display: block;
+}
+
+.nav-a-hidden {
+  display: none;
+  padding: 0;
+}
+
+/* =========================main主要設定========================= */
+main {
+  height: 100vh;
+  background-color: #fff;
+}
+
+.primary-type {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #666666;
+}
+
+.secondary-type {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666666;
+}
+
+.hr-line {
+  max-width: 1200px;
+  margin: 15px auto;
+  border: 1px solid #e8e8e8;
+}
+/* =========================aside========================= */
+aside{
+  display: flex;
+  max-width: 1200px;
+  margin: 15px auto;
+  justify-content: space-between;
+}
+
+aside > div {
+  margin: 0 20px;
+  line-height: 40px;
+}
+
+.account-management,.order-record {
+  cursor: pointer;
+}
+/* =========================profile========================= */
+#user-profile-container {
+  max-width: 1200px;
+  margin: 25px auto;
+}
+
+.user-img-container{
+  display: flex;
+}
+
+#user-icon {
+  width: 40px;
+  height: 40px;
+}
+
+#user-icon img {
+  width: 100%;
+}
+
+.user-name {
+  line-height: 40px;
+  padding-left: 20px;
+}
+
+.user-profile-name-span {
+  position: absolute;
+  left: 105px;
+}
+
+.user-profile-email-span {
+  position: absolute;
+  left: 105px;
+}
+
+.user-profile-phone-span {
+  position: absolute;
+  left: 105px;
+}
+
+#logout-btn {
+  outline: none;
+  border: none;
+  background-color: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+}
+/* =========================user-profile========================= */
+.profile-type {
+  position: relative;
+  margin: 15px 0;
+}
+/* =========================change-password========================= */
+.change-type {
+  margin: 15px 0;
+}
+
+.change-password-container {
+  position: relative;
+  margin-top: 30px;
+}
+
+.change-type input {
+  margin-left: 55px;
+}
+
+.confirm-input{
+  margin-left: 39px;
+}
+
+#change-password-btn {
+  position: absolute;
+  right: 0;
+  outline: none;
+  border: none;
+  padding: 10px;
+  margin-top: 30px;
+  background: #448899;
+  color:#fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: #f00;
+  margin-top: 20px;
+}
+/* =========================order-record========================= */
+.order-record-container {
+  max-width: 1190px;
+  margin: 25px auto;
+}
+
+/* #order-record-title {
+  padding-left: 5px;
+} */
+
+.order-record-number-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .order-record-text {
+  padding: 5px;
+} */
+
+.order-record-details {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 15px;
+  border:1px solid #e8e8e8;
+  border-radius: 5px;
+}
+
+.order-record-img-container {
+  grid-column: 1;
+  grid-row: 1 / -1;
+}
+
+.order-record-name {
+  color: #448899;
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+.order-record-date {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.order-record-time {
+  grid-column: 2/4;
+  grid-row: 3/4;
+}
+
+.order-record-address {
+  grid-column: 3/5;
+  grid-row: 2/3;
+}
+
+.order-record-img {
+  width: 100%;
+  height: 100%;
+}
+
+footer {
+  display: flex;
+  margin-top: 30px;
+  background: #757575;
+  width: 100%;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+/* ===========================RWD區塊=========================== */
+@media screen and (max-width: 1200px) {
+  header .header-container {
+    padding: 10px 10px;
+  }
+
+  main {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  .order-record-details {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+}
+
+@media screen and (max-width: 800px) {
+  .order-record-details {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  .order-record-img-container {
+    grid-column: 1/3 ;
+    grid-row: 1/-1;
+  }
+
+  .order-record-name {
+    grid-column: 3/5;
+    grid-row: 1/2;
+  }
+
+  .order-record-date {
+    grid-column: 3/5;
+    grid-row: 2/3;
+  }
+
+  .order-record-time {
+    grid-column: 3/5;
+    grid-row: 3/4;
+  }
+
+  .order-record-address {
+    grid-column: 3/5;
+    grid-row: 4/5;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  aside {
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 10px ;
+  }
+
+  .order-record-details {
+    display: block;
+  }
+
+  .order-record-name {
+    margin: 10px 0;
+  }
+
+  .order-record-date {
+    margin: 10px 0;
+  }
+
+  .order-record-time {
+    margin: 10px 0;
+  }
+
+  .order-record-address {
+    margin: 10px 0;
+  }
+
+  footer {
+    margin-top: 150px;
+  }
+
+
+
+
+}
+
+
+

@@ -141,7 +141,6 @@ nav a {
 .attraction-img img {
   width: 100%;
   object-fit: cover;
-  aspect-ratio: 4/3;
 }
 
 .attraction-booking-info{
@@ -161,14 +160,14 @@ nav a {
 }
 
 .attraction-booking-info .booking-attraction {
-  margin: 2px 0 15px 20px;
+  margin: 2px 0 40px 20px;
   font-size: 1rem;
   font-weight: 700;
   color: #448899;
 }
 
 .attraction-booking-info > div {
-  margin: 20px 0 20px 20px;
+  margin: 20px 0 30px 20px;
 }
 
 .primary-type > p {
@@ -300,13 +299,31 @@ footer {
 /* ===========================RWD區塊=========================== */
 
 @media screen and (max-width: 1200px) {
+  header .header-container {
+    padding: 10px 10px;
+  }
+
   main {
     width: 90%;
     margin: 0 auto;
   }
 
-  header .header-container {
-    padding: 10px 10px;
+  .attraction-booking-info .booking-attraction {
+    margin: 2px 0 20px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #448899;
+  }
+
+  .attraction-booking-info > div {
+    margin: 20px 0 15px 20px;
+  }
+
+}
+
+@media screen and (max-width:800px) {
+  .attraction-img {
+    max-width: 50%;
   }
 }
 

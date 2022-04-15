@@ -88,6 +88,27 @@ def confirm_register_successful(email):
       con.rollback()
     con.close()
 
+def update_user_password(email, old_password, new_password):
+  try:
+    con = pool.get_connection()
+    cursor = con.cursor()
+    sql_update = "UPDATE user_table SET password=%s WHERE email=%s AND password=%s"
+    cursor.execute(sql_update, (new_password, email, old_password))
+    con.commit()
+    sql_select = "SELECT email, password FROM user_table WHERE email=%s"
+    cursor.execute(sql_select, (email,))
+    result = cursor.fetchone()
+    if result[1] == new_password :
+      return True
+  except mysql.connector.Error as err:
+    print(f"user.py update_user_password function {err}")
+    con.rollback()
+    return False
+  finally:
+    if con.in_transaction:
+      con.rollback()
+    con.close()
+
 def email_regex_check(email):
   rex = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
   result = re.match(rex, email)

@@ -45,6 +45,7 @@ def select_attractions(**kwargs):
       return data
   except mysql.connector.Error as err:
     print(f"attraction.py select_attractions function {err}")
+    con.rollback()
   finally:
     if con.in_transaction:
       con.rollback()
@@ -117,6 +118,8 @@ def select_att_id(att_id):
       return res
   except mysql.connector.Error as err:
     print(f"attraction.py select_att_id function {err}")
+    con.rollback()
+
   finally:
     if con.in_transaction:
       con.rollback()

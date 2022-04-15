@@ -103,3 +103,27 @@ def api_user_logout():
   res = make_response({"ok" : True}, 200)
   res.set_cookie(key="jwt", value="", expires=0)
   return res
+
+@user.route("/user", methods=["PUT"])
+def api_user_update():
+  try:
+    update_data = request.get_json()
+    email = update_data["email"]
+    old_password = update_data["old_password"]
+    new_password = update_data["new_password"]
+    change_password = update_user_password(email, old_password, new_password)
+    if change_password:
+      res = {"ok" : True}
+      return jsonify(res), 200
+    else:
+      res = {
+        "error": True,
+        "message": "使用者密碼變更失敗，格式不符或其他原因"
+      }
+      return jsonify(res), 400
+  except:
+    res = {
+        "error" : True,
+        "message" : "伺服器內部發生錯誤"
+      }
+    return jsonify(res), 500

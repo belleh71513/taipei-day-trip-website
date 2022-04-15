@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台北一日遊-會員</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/member.css">
+
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="header-text"><a class="header-text-a"href="/">台北一日遊</a></div>
+      <nav>
+        <ul>
+          <li><a href="/">預定行程</a></li>
+          <li class="logout-li"><a id="login-register" href="/">登入/註冊</a></li>
+          <li class="logout-a"><a class="logout" href="/">會員專區</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <aside id="user-container">
+      <div class="user-img-container">
+        <div id="user-icon"><img src="../static/img/user-icon.png" alt=""></div>
+        <div class="secondary-type user-name">大家好</div>
+      </div>
+      <div class="primary-type account-management">帳戶管理</div>
+      <div class="primary-type order-record">訂單紀錄</div>
+      <button id="logout-btn" class="primary-type logout-btn">登出帳號</button>
+    </aside>
+
+    <section id="user-profile-container">
+      <div class="my-profile">
+        <h4 class="primary-type profile-type">我的檔案</h4>
+        <hr class="hr-line">
+        <div class="secondary-type profile-type">使用者名稱<span class="user-profile-name-span">王小明</span></div>
+        <div class="secondary-type profile-type">Email<span class="user-profile-email-span">test@abc.com</span>
+        </div>
+        <div class="secondary-type profile-type">手機號碼 <span class="user-profile-phone-span">0912345678</span></div>
+      </div>
+      <div class="change-password-container">
+        <h4 class="primary-type change-type">更改密碼</h4>
+        <hr class="hr-line">
+        <div class="secondary-type change-type">舊密碼<input id="old-password" type="text"></div>
+        <div class="secondary-type change-type">新密碼<input id="new-password" type="text"></div>
+        <div id="confirm-password" class="secondary-type">確認密碼<input type="text" class="confirm-input"></div>
+        <button id="change-password-btn"class="secondary-type" type="submit">儲存變更</button>
+        <div class="error-message"></div>
+      </div>
+    </section>
+
+    <section class="order-record-container" style="display: none;">
+      <h4 id="order-record-title"class="primary-type profile-type">您的訂單紀錄如下 : </h4>
+      <hr class="hr-line">
+      <div class="secondary-type profile-type order-record-number-header">
+        <div id="order-record-number" class="order-record-text">訂單編號&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;202204102222222</div>
+        <div id="order-record-price" class="order-record-text">訂單總金額&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$2500</div>
+      </div>
+      <div class="order-record-details secondary-type profile-type">
+        <div class="order-record-img-container"><img
+          id="order-record-att-img" src="https://www.travel.taipei/d_upload_ttn/sceneadmin/pic/11000848.jpg" alt="" class="order-record-img"></div>
+        <div class="order-record-name">台北一日遊 : 士林官邸</div>
+        <div class="secondary-type order-record-date">日期:2022-04-25</div>
+        <div class="secondary-type order-record-time">時間:早上4點到下午5點</div>
+        <div class="secondary-type order-record-address">地點:台北市 士林區福林路60號</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>COPYRIGHT &copy; 2021 台北一日遊</p>
+ </footer>
+
+
+
+</body>
+</html>
