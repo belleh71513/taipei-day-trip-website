@@ -4,7 +4,6 @@ const userProfileContainerEle = document.querySelector("#user-profile-container"
 const orderRecordContainerEle = document.querySelector(".order-record-container")
 const accountManagementEle = document.querySelector(".account-management")
 const orderRecordEle = document.querySelector(".order-record")
-const logoutBtn = document.querySelector("#logout-btn")
 const changePasswordBtn = document.querySelector("#change-password-btn")
 
 const loginLi = document.querySelector(".logout-li");
@@ -82,7 +81,7 @@ async function initMemberPage(){
 }
 initMemberPage();
 
-logoutBtn.addEventListener("click", async() => {
+logoutA.addEventListener("click", async() => {
   const res = await fetch(userApiURL,{method : "DELETE"});
   const data = await res.json();
   if(data.ok){window.location.href = "/";}

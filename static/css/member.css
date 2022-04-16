@@ -154,14 +154,6 @@ aside > div {
   position: absolute;
   left: 105px;
 }
-
-#logout-btn {
-  outline: none;
-  border: none;
-  background-color: #fff;
-  margin-right: 10px;
-  cursor: pointer;
-}
 /* =========================user-profile========================= */
 .profile-type {
   position: relative;
