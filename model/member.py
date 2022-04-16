@@ -14,7 +14,7 @@ dbconfig = {
 }
 
 pool = mysql.connector.pooling.MySQLConnectionPool(
-  poo_lname = "my_pool",
+  pool_name = "my_pool",
   pool_size = 5,
   pool_reset_session = True,
   **dbconfig
@@ -25,10 +25,10 @@ def member_data_get(user_id):
     con = pool.get_connection()
     cursor = con.cursor(dictionary=True)
     sql = """
-          SELECT o.order_number, o.price, a.name AS attraction_name, a.address, a.images AS attraction_images, o.date, o.time, o.name o.phone FROM order_table AS o JOIN attraction_table AS a
+          SELECT o.order_number, o.price, a.name AS attraction_name, a.address AS attraction_address, a.images AS attraction_images, o.date, o.time, o.name ,o.phone FROM order_table AS o JOIN attraction_table AS a
           ON o.attraction_id = a.id WHERE o.user_id = %s
     """
-    cursor.execute(sql, user_id)
+    cursor.execute(sql, (user_id,))
     result = cursor.fetchall()
     return result
   except mysql.connector.Error as err:

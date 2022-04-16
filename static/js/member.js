@@ -1,11 +1,15 @@
 const userApiURL = `${window.location.origin}/api/user`
 const memberApiURL = `${window.location.origin}/api/member`
-const userContainerEle = document.querySelector(".user-container")
+const userProfileContainerEle = document.querySelector("#user-profile-container")
 const orderRecordContainerEle = document.querySelector(".order-record-container")
 const accountManagementEle = document.querySelector(".account-management")
 const orderRecordEle = document.querySelector(".order-record")
 const logoutBtn = document.querySelector("#logout-btn")
 const changePasswordBtn = document.querySelector("#change-password-btn")
+
+const loginLi = document.querySelector(".logout-li");
+const logoutA = document.querySelector(".logout-a");
+
 let email;
 let data = null;
 
@@ -13,7 +17,9 @@ async function getUserStatus() {
   const res = await fetch(userApiURL);
   const userJsonData = await res.json();
   if(userJsonData.data) {
-    email = data.data.email;
+    loginLi.classList.add("nav-a-hidden")
+    logoutA.classList.add("nav-a-show")
+    email = userJsonData.data.email;
   }
   else {
     window.location.href = "/";
@@ -39,21 +45,34 @@ function renderMemberAccountPage () {
   const orderRecordDateEle = document.querySelector(".order-record-date")
   const orderRecordTimeEle = document.querySelector(".order-record-time")
   const orderRecordAddressEle = document.querySelector(".order-record-address")
+  const noOrderRecordMessage = document.querySelector("#no-order-record-message")
+  const orderRecordDetails = document.querySelector(".order-record-details")
 
 
-  for(let item of memberData) {
-    userNameElement.textContent = item["contact"]["name"]
-    userProfileNameSpan.textContent = item["contact"]["name"]
-    userProfileEmailSpan.textContent = email
-    userProfilePhoneSpan.textContent = item["contact"]["phone"]
-    orderRecordNumberEle.textContent = `訂單編號    ${item["number"]}`
-    orderRecordPriceEle.textContent = `訂單總金額   ${item["price"]}`
-    orderRecordAttImgEle.src = item["trip"]["attraction"]["iamge"]
-    orderRecordAttNameEle.textContent = `台北一日遊  :    ${item["trip"]["attraction"]["name"]}`
-    orderRecordDateEle.textContent = `日期  :    ${item["trip"]["date"]}`
-    orderRecordTimeEle.textContent = `時間  :    ${item["trip"]["time"]}`
-    orderRecordAddressEle.textContent = `地點  :    ${item["trip"]["attraction"]["address"]}`
+  if(memberData){
+    for(let item of memberData) {
+      let dateFormat = new Date(item["trip"]["date"]);
+      let date = dateFormat.toISOString().split('T')[0];
+      let time = item["trip"]["time"] == "morning" ? "早上 9 點到 下午 5點" : "下午 1 點到 下午 9點";
+
+      userNameElement.textContent = item["contact"]["name"]
+      userProfileNameSpan.textContent = item["contact"]["name"]
+      userProfileEmailSpan.textContent = email
+      userProfilePhoneSpan.textContent = item["contact"]["phone"]
+      orderRecordNumberEle.textContent = `訂單編號    ${item["number"]}`
+      orderRecordPriceEle.textContent = `訂單總金額   ${item["price"]}`
+      orderRecordAttImgEle.src = item["trip"]["attraction"]["image"]
+      orderRecordAttNameEle.textContent = `台北一日遊  :    ${item["trip"]["attraction"]["name"]}`
+      orderRecordDateEle.textContent = `日期  :    ${date}`
+      orderRecordTimeEle.textContent = `時間  :    ${time}`
+      orderRecordAddressEle.textContent = `地點  :    ${item["trip"]["attraction"]["address"]}`
+    }
+  }else {
+    noOrderRecordMessage.style.display = "block";
+    orderRecordDetails.style.display = "none"
+    noOrderRecordMessage.textContent = `${data.message}`
   }
+
 }
 
 async function initMemberPage(){
@@ -61,11 +80,12 @@ async function initMemberPage(){
   await memberData();
   renderMemberAccountPage();
 }
+initMemberPage();
 
 logoutBtn.addEventListener("click", async() => {
   const res = await fetch(userApiURL,{method : "DELETE"});
   const data = await res.json();
-  window.location.href = "/";
+  if(data.ok){window.location.href = "/";}
 })
 
 changePasswordBtn.addEventListener("click", async() => {
@@ -73,6 +93,9 @@ changePasswordBtn.addEventListener("click", async() => {
   const newPasswordVal = document.querySelector("#new-password").value
   const confirmPasswordVal = document.querySelector("#confirm-password").value
   const errorMessage = document.querySelector(".error-message")
+  console.log(oldPasswordVal)
+  console.log(newPasswordVal)
+  console.log(confirmPasswordVal)
 
   if(oldPasswordVal === newPasswordVal){
     return errorMessage.textContent = "新、舊密碼不得重複!!!"
@@ -98,7 +121,7 @@ changePasswordBtn.addEventListener("click", async() => {
         errorMessage.style.color = "blue";
         setTimeout(() =>{
           window.location.href = "/";
-        },1000)
+        },1500)
       }
     }catch(e){
       console.log(e)
@@ -107,12 +130,12 @@ changePasswordBtn.addEventListener("click", async() => {
 })
 
 orderRecordEle.addEventListener("click", () => {
-  userContainerEle.style.display = "none";
+  userProfileContainerEle.style.display = "none";
   orderRecordContainerEle.style.display = "block";
 })
 
 accountManagementEle.addEventListener("click", () => {
-  userContainerEle.style.display = "block";
+  userProfileContainerEle.style.display = "block";
   orderRecordContainerEle.style.display = "none";
 })
 

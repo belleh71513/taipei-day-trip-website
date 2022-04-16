@@ -9,6 +9,7 @@ const loginToggleBtn = document.querySelector(".login-toggle-btn");
 const registerToggleBtn = document.querySelector(".register-toggle-btn");
 const registerMessage = document.querySelector("#registerMessage");
 const loginMessage = document.querySelector("#loginMessage");
+const memberCenterEle = document.querySelector(".member-center");
 // *********************預定行程元素*****************************
 const headerBookingTripBtn = document.querySelector(".booking-trip")
 // *********************註冊表單元素*****************************
@@ -68,8 +69,10 @@ function checkUserStatus(){
     if(data.data){
       loginLi.classList.add("nav-a-hidden")
       logoutA.classList.add("nav-a-show")
+      memberCenterEle.classList.add("nav-a-show")
     }else{
       logoutA.classList.add("nav-a-hidden")
+      memberCenterEle.classList.add("nav-a-hidden")
     }
   })
 }
@@ -199,7 +202,13 @@ function bookingTrip(e){
   })
 }
 headerBookingTripBtn.addEventListener("click", bookingTrip)
-
+// *********************會員專區*****************************
+memberCenterEle.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const res= await fetch("/api/member");
+  const data = await res.json();
+  window.location.href = "/member";
+})
 
 let inputs = document.querySelectorAll("input")
 inputs.forEach( input => {
