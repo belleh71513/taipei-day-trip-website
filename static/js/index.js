@@ -32,8 +32,6 @@ async function getData(){
 function renderPage (){
   let attData = data.data;
   nextPage = data.nextPage;
-  loader.style.display = "block";
-
   // 有資料就渲染頁面
   // loader.style.display = "block";
   if (attData){
@@ -80,14 +78,16 @@ function renderPage (){
     secondSection.appendChild(searchMessage);
   }
   // 記錄下一頁的資料
-  loader.style.display = "none";
   page = nextPage;
 }
 
 // ********************頁面初始化************************
 async function init(){
+  loader.style.display = "block";
   await getData();
   renderPage();
+  loader.style.display = "none";
+
   dataSrc();
 }
 init()
@@ -100,14 +100,20 @@ function dataSrc(){
 }
 
 const options = {
-  rootMargin: "0px 0px 20px 0px",
+  rootMargin: "0px 0px 50px 0px",
   threshold:0
 };
 const callback = (entries, observer) => {
   if(!fetching){
-    entries.forEach(entry => {
+    entries.forEach(async entry => {
       if(entry.intersectionRatio > 0 && page){
-        init();
+
+
+        await init();
+        // loader.style.display = "none";
+        // console.log(loader.style.display )
+
+
       }
       else if(page === null){
         observer.unobserve(footer);

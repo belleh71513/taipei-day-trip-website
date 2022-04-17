@@ -9,6 +9,7 @@ const orderSuccessTitle = document.querySelector(".order-success-title")
 const orderSuccessText = document.querySelector(".order-success-text")
 const orderSuccessNumber = document.querySelector(".order-number")
 const orderReminder = document.querySelector(".order-reminder")
+const loader = document.querySelector(".loader")
 
 let data = null;
 async function getUser(){
@@ -33,8 +34,10 @@ function renderThankyouPage(){
 }
 
 async function initThankyouPage(){
+  loader.style.display = "block";
   await getUser();
   renderThankyouPage();
+  loader.style.display = "none";
 }
 initThankyouPage();
 

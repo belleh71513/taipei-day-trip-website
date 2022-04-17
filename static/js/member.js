@@ -8,6 +8,7 @@ const changePasswordBtn = document.querySelector("#change-password-btn")
 
 const loginLi = document.querySelector(".logout-li");
 const logoutA = document.querySelector(".logout-a");
+const loader = document.querySelector(".loader")
 
 let email;
 let data = null;

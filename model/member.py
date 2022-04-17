@@ -38,3 +38,4 @@ def member_data_get(user_id):
     if con.in_transaction:
       con.rollback()
     con.close()
+

@@ -3,6 +3,7 @@ const bookingApiURL = `${window.location.origin}/api/booking`;
 // ********************取得header元素****************************
 const loginLi = document.querySelector(".logout-li");
 const logoutA = document.querySelector(".logout-a");
+const memberCenterEle = document.querySelector(".member-center");
 // ********************取得main元素****************************
 const mainElement = document.querySelector("#booking-main");
 const attractionImg = document.querySelector(".attraction-img");
@@ -26,6 +27,7 @@ const contactPhone = document.querySelector("#phone-number")
 const sendBtn = document.querySelector(".confirm-btn");
 const confirmMessage = document.querySelector("#confirm-message")
 
+const loader = document.querySelector(".loader")
 const footer = document.querySelector("footer");
 
 let data = null;
@@ -41,6 +43,7 @@ async function getUser(){
   const response = await fetch(userApiURL);
   const result = await response.json();
   if(result.data){
+    memberCenterEle.classList.add("nav-a-show")
     userName = result.data.name;
     email = result.data.email;
   }
@@ -81,9 +84,11 @@ function renderBookingPage(){
 }
 // ********************初始化page****************************
 async function initBookingPage(){
+  loader.style.display = "block";
   await initBookingData();
   await getUser();
   renderBookingPage();
+  loader.style.display = "none";
 }
 initBookingPage();
 
@@ -311,3 +316,10 @@ function setNumberFormGroupToNormal(selector) {
   $(selector).removeClass('has-error')
   $(selector).removeClass('has-success')
 }
+// 會員專區
+memberCenterEle.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const res= await fetch("/api/member");
+  const data = await res.json();
+  window.location.href = "/member";
+})
