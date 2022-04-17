@@ -43,8 +43,6 @@ def api_member():
             }
           }
         member_list.append(data)
-      print(member_list)
-
       return jsonify({"data":member_list}), 200
     else:
       data = {
