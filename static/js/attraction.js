@@ -1,5 +1,6 @@
 
 // ********************取得景點元素*************************
+const mainElement = document.querySelector("main")
 const imgContainer = document.querySelector(".img-container")
 const attractionName = document.querySelector(".attraction-name")
 const attractionCategoryMrt = document.querySelector(".attraction-category-mrt")
@@ -13,7 +14,7 @@ const bookingAm= document.querySelector("#am");
 const bookingPm= document.querySelector("#pm");
 const bookingBtn = document.querySelector(".booking-btn")
 const buttonSapn = document.querySelector(".button-span")
-
+const loader = document.querySelector(".loader")
 // ******************取得 api 資料***********************
 let currentURL = window.location.href
 let attractionID = currentURL.split("/").pop()
@@ -58,8 +59,12 @@ function renderPage(){
 
 //*******************初始化函式************************
 async function init(){
+  loader.style.display = "block";
+  mainElement.style.display = "none";
   await initData();
   renderPage();
+  loader.style.display = "none";
+  mainElement.style.display = "flex";
 }
 init()
 

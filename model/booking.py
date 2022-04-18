@@ -31,8 +31,8 @@ def booking_select_data(user_id):
     cursor.execute(sql, (user_id,))
     result = cursor.fetchone()
     return result
-  except:
-    print("booking_select_data function error")
+  except mysql.connector.Error as err:
+    print(f"booking.py booking_select_data function {err}")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -53,8 +53,8 @@ def booking_insert_data(*data):
       con.commit()
       confirm_insert_success = check_data_status(user_id)
       return confirm_insert_success
-  except:
-    print("booking_insert_data function error")
+  except mysql.connector.Error as err:
+    print(f"booking.py booking_insert_data function {err}")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -70,8 +70,8 @@ def booking_data_delete(user_id):
     result = check_data_status(user_id)
     if not result:
       return None
-  except:
-    print("delete_booking_data function error")
+  except mysql.connector.Error as err:
+    print(f"booking.py booking_data_delete {err}")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -88,8 +88,8 @@ def check_data_status(user_id):
       return True
     else:
       return False
-  except:
-    print("check_data_status function error")
+  except mysql.connector.Error as err:
+    print(f"booking.py check_data_status function {err}")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -104,8 +104,8 @@ def update_booking_data(*data):
     con.commit()
     check_new_booking = check_data_status(data[0][4])
     return check_new_booking
-  except:
-    print("update_booking_data function error")
+  except mysql.connector.Error as err:
+    print(f"booking.py update_booking_data function {err}")
   finally:
     if con.in_transaction:
       con.rollback()

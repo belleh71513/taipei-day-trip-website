@@ -1,6 +1,8 @@
 // ********************取得元素*************************
 const secondSection = document.querySelector(".second-section");
 const footer = document.querySelector("footer");
+const loader = document.querySelector(".loader")
+
 
 // ********************取得資料*************************
 // page從 0 開始搜尋
@@ -31,6 +33,7 @@ function renderPage (){
   let attData = data.data;
   nextPage = data.nextPage;
   // 有資料就渲染頁面
+  // loader.style.display = "block";
   if (attData){
     for(let item of attData){
     gridBox = document.createElement("div");
@@ -80,12 +83,14 @@ function renderPage (){
 
 // ********************頁面初始化************************
 async function init(){
+  loader.style.display = "block";
   await getData();
   renderPage();
+  loader.style.display = "none";
+
   dataSrc();
 }
 init()
-
 
 function dataSrc(){
   const originImg = document.querySelectorAll(".origin-img")
@@ -95,14 +100,20 @@ function dataSrc(){
 }
 
 const options = {
-  rootMargin: "0px 0px 20px 0px",
+  rootMargin: "0px 0px 50px 0px",
   threshold:0
 };
 const callback = (entries, observer) => {
   if(!fetching){
-    entries.forEach(entry => {
+    entries.forEach(async entry => {
       if(entry.intersectionRatio > 0 && page){
-        init();
+
+
+        await init();
+        // loader.style.display = "none";
+        // console.log(loader.style.display )
+
+
       }
       else if(page === null){
         observer.unobserve(footer);

@@ -1,5 +1,7 @@
+from mysql.connector import pooling
 from dotenv import load_dotenv
 import mysql.connector
+import re
 import os
 
 load_dotenv()
@@ -26,8 +28,8 @@ def user_check_status(email):
     result = cursor.fetchone()
     if result :
       return result
-  except:
-    print("check_status function error")
+  except mysql.connector.Error as err:
+    print(f"user.py user_check_status function {err}")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -49,8 +51,8 @@ def user_register(*data):
         return True
     else:
       return False
-  except:
-    print("register function error")
+  except mysql.connector.Error as err:
+    print(f"user.py user_register function {err}")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -64,8 +66,8 @@ def user_login(*data):
     cursor.execute(sql, data)
     result = cursor.fetchone()
     return result
-  except:
-    print("login function error")
+  except mysql.connector.Error as err:
+    print(f"user.py order_login function {err}")
   finally:
     if con.in_transaction:
       con.rollback()
@@ -79,9 +81,44 @@ def confirm_register_successful(email):
     cursor.execute(sql, (email,))
     result = cursor.fetchone()[0]
     return result
-  except:
-    print("confirm_register_successful function error")
+  except mysql.connector.Error as err:
+    print(f"user.py confirm_register_successful function {err}")
   finally:
     if con.in_transaction:
       con.rollback()
     con.close()
+
+def update_user_password(email, old_password, new_password):
+  try:
+    con = pool.get_connection()
+    cursor = con.cursor()
+    sql_update = "UPDATE user_table SET password=%s WHERE email=%s AND password=%s"
+    cursor.execute(sql_update, (new_password, email, old_password))
+    con.commit()
+    sql_select = "SELECT email, password FROM user_table WHERE email=%s"
+    cursor.execute(sql_select, (email,))
+    result = cursor.fetchone()
+    if result[1] == new_password :
+      return True
+  except mysql.connector.Error as err:
+    print(f"user.py update_user_password function {err}")
+    con.rollback()
+    return False
+  finally:
+    if con.in_transaction:
+      con.rollback()
+    con.close()
+
+def email_regex_check(email):
+  rex = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+  result = re.match(rex, email)
+  return result
+
+def password_regex_check(password):
+  rex = r"^(?=.*\d)(?=.*[a-z]).{6,20}$"
+  result = re.match(rex, password)
+  return result
+
+
+
+

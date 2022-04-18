@@ -3,6 +3,7 @@ from api.api_attraction import attractions
 from api.api_user import user
 from api.api_booking import booking
 from api.api_order import orders
+from api.api_member import member
 
 app=Flask(__name__,static_folder="static", static_url_path="/")
 app.config["JSON_AS_ASCII"]=False
@@ -14,6 +15,7 @@ app.register_blueprint(attractions, url_prefix="/api")
 app.register_blueprint(user, url_prefix="/api")
 app.register_blueprint(booking, url_prefix="/api")
 app.register_blueprint(orders, url_prefix="/api")
+app.register_blueprint(member, url_prefix="/api")
 
 # Pages
 @app.route("/")
@@ -28,6 +30,9 @@ def booking():
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
+@app.route("/member")
+def member():
+	return render_template("member.html")
 
 
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>台北一日遊</title>
+  <title>台北一日遊-景點</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='/css/attraction.css') }}">
 </head>
@@ -14,9 +14,10 @@
       <div class="header-text"><a href="/">台北一日遊</a></div>
       <nav>
         <ul>
-          <li class="booking-trip"><a href="/booking">預定行程</a></li>
+          <li class="booking-trip"><a href="/">預定行程</a></li>
           <li class="logout-li"><a id="login-register" href="/">登入/註冊</a></li>
           <li class="logout-a"><a class="logout" href="/">登出系統</a></li>
+          <li class="member-center"><a href="/">會員專區</a></li>
         </ul>
       </nav>
     </div>
@@ -57,6 +58,8 @@
       <div class="toggle-btn register-toggle-btn">已經有帳戶了 ? 點此登入</div>
     </div>
   </section>
+
+  <div class="loader"></div>
 
   <main>
     <section class="img-area">
@@ -100,7 +103,7 @@
             <!-- 費用 -->
           </div>
         </div>
-        <button type="button" class="booking-btn" >開始預訂行程</button>
+        <button type="button" class="booking-btn">開始預訂行程</button>
         <span class="button-span"></span>
       </form>
     </section>

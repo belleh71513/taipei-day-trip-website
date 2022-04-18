@@ -55,23 +55,3 @@ def api_attraction_attractionID(attractionID):
       "message": "伺服器內部錯誤"
     }
     return jsonify(res), 500
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
